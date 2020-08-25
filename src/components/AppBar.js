@@ -15,9 +15,21 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
   },
-
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block'
+    }
+  },
+  titleMobile: {
+    flexGrow: 1,
+    display: 'block',
+    textAlign: 'center',
+    marginTop: theme.spacing(1),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none'
+    }
   },
   search: {
     position: 'relative',
@@ -83,6 +95,9 @@ export default function SearchAppBar() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
+        <Typography className={classes.titleMobile} variant="h6" noWrap>
+          App Factory
+        </Typography>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             App Factory

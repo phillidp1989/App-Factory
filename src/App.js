@@ -1,11 +1,10 @@
 import React from 'react';
+import AppBar from './components/AppBar';
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <h1>hello world</h1>
+      <AppBar />
     </div>
   );
 }
-
-export default App;

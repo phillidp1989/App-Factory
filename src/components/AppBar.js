@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import { Link } from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
+import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
-import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -96,10 +98,16 @@ export default function SearchAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Typography className={classes.titleMobile} variant="h6" noWrap>
+          <IconButton component={Link} to="/" aria-label="Home">
+            <HomeIcon />
+          </IconButton>
           App Factory
         </Typography>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
+            <IconButton component={Link} to="/" aria-label="Home">
+              <HomeIcon />
+            </IconButton>
             App Factory
           </Typography>
           <div className={classes.search}>
@@ -142,7 +150,13 @@ export default function SearchAppBar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My dashboard</MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/dashboard"
+                  onClick={handleClose}
+                >
+                  My dashboard
+                </MenuItem>
                 <MenuItem
                   onClick={() => {
                     handleClose();

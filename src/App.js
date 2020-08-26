@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from './components/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
+import AllPosts from './pages/AllPosts';
 
 export default function App() {
   return (
@@ -11,7 +11,7 @@ export default function App() {
       <Router>
         <AppBar />
         <Switch>
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/allposts" component={AllPosts} />
         </Switch>
       </Router>
     </div>

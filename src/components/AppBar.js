@@ -4,7 +4,16 @@ import { Link } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { AppBar, Toolbar, IconButton, Typography, InputBase, Menu, MenuItem, Button } from '@material-ui/core';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  InputBase,
+  Menu,
+  MenuItem,
+  Button
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {

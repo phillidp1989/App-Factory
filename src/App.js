@@ -3,6 +3,8 @@ import AppBar from './components/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
+import LoginCard from './pages/Login/LoginCard';
+
 
 export default function App() {
   return (
@@ -12,6 +14,9 @@ export default function App() {
         <AppBar />
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
+        </Switch>
+        <Switch>
+          <Route exact path="/login" component={LoginCard} />
         </Switch>
       </Router>
     </div>

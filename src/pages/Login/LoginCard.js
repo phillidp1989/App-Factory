@@ -89,7 +89,6 @@ export default function RoleSelection() {
               Welcome to App Factory
             </Typography>
             <div className={classes.flex}>
-
               <PosterLogin />
               <div className={classes.dividerContainer}>
                 <div className={classes.border} />

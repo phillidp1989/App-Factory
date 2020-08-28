@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 10
   },
   link: {
-    textDecoration: "none !important"
+    textDecoration: 'none !important'
   }
 }));
 
@@ -30,16 +30,20 @@ function DeveloperLogin() {
       <h2>Login as a developer</h2>
       <div className={classes.btnContainer}>
         <a href="http://localhost:5000/auth/github" className={classes.link}>
-          <Button variant="contained" className={classes.github} color="primary">
+          <Button
+            variant="contained"
+            className={classes.github}
+            color="primary"
+          >
             <div className={classes.icon}>
               <i className="fab fa-github"></i>
             </div>{' '}
-                      Login with Github
-                    </Button>
+            Login with Github
+          </Button>
         </a>
       </div>
     </div>
-  )
+  );
 }
 
-export default DeveloperLogin
+export default DeveloperLogin;

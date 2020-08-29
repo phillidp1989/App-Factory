@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   github: {
@@ -17,8 +17,10 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: 10
   },
-  link: {
-    textDecoration: 'none !important'
+  developer: {
+    [theme.breakpoints.up(780)]: {
+      width: '50%'
+    }
   }
 }));
 
@@ -26,21 +28,22 @@ function DeveloperLogin() {
   const classes = useStyles();
 
   return (
-    <div className="developer">
-      <h2>Login as a developer</h2>
+    <div className={classes.developer}>
+      <Typography variant="h6">
+        Login as a developer
+      </Typography>
       <div className={classes.btnContainer}>
-        <a href="http://localhost:5000/auth/github" className={classes.link}>
-          <Button
-            variant="contained"
-            className={classes.github}
-            color="primary"
-          >
-            <div className={classes.icon}>
-              <i className="fab fa-github"></i>
-            </div>{' '}
-            Login with Github
-          </Button>
-        </a>
+        <Button
+          variant="contained"
+          className={classes.github}
+          color="primary"
+          href="http://localhost:5000/auth/github"
+        >
+          <div className={classes.icon}>
+            <i className="fab fa-github"></i>
+          </div>{' '}
+          Login with Github
+        </Button>
       </div>
     </div>
   );

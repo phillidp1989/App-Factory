@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PosterLogin from './PosterLogin';
 import DeveloperLogin from './DeveloperLogin';
-
 import { Typography, Card, CardContent, Grow, Divider } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({

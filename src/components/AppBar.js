@@ -131,9 +131,7 @@ export default function SearchAppBar() {
           </div>
           {user && isLoaded ? (
             <div>
-              <ProfilePic
-                handleMenu={handleMenu}
-              />
+              <ProfilePic handleMenu={handleMenu} />
               <Menu
                 id="menu-appbar"
                 className={classes.pointer}
@@ -159,7 +157,10 @@ export default function SearchAppBar() {
                 >
                   My dashboard
                 </MenuItem>
-                <a href="http://localhost:5000/auth/logout" className={classes.link}>
+                <a
+                  href="http://localhost:5000/auth/logout"
+                  className={classes.link}
+                >
                   <MenuItem
                     onClick={() => {
                       handleClose();

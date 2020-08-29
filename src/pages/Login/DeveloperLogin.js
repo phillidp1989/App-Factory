@@ -6,7 +6,10 @@ const useStyles = makeStyles((theme) => ({
   github: {
     color: '#ffffff',
     backgroundColor: '#333',
-    margin: 15
+    margin: 15,
+    "&:hover, &:focus": {
+      backgroundColor: '#0c0c0c',
+    }
   },
   btnContainer: {
     display: 'flex',

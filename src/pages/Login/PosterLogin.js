@@ -7,7 +7,10 @@ const useStyles = makeStyles((theme) => ({
   facebook: {
     color: '#ffffff',
     backgroundColor: '#3b5998',
-    margin: 15
+    margin: 15,
+    "&:hover, &:focus": {
+      backgroundColor: '#003069',
+    }
   },
   google: {
     backgroundColor: '#DB4437',

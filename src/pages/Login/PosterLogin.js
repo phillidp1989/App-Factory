@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
+import GoogleLogin from '../../images/btn_google_signin_dark_normal_web@2x.png';
 
 const useStyles = makeStyles((theme) => ({
   facebook: {
@@ -22,8 +23,16 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: 10
   },
-  link: {
-    textDecoration: 'none !important'
+  button: {
+    width: '80%'
+  },
+  img: {
+    width: '100%'
+  },
+  poster: {
+    [theme.breakpoints.up(780)]: {
+      width: '50%'
+    }
   }
 }));
 
@@ -31,33 +40,25 @@ function PosterLogin() {
   const classes = useStyles();
 
   return (
-    <div className="poster">
-      <h2>Login as a poster</h2>
+    <div className={classes.poster}>
+      <Typography variant="h6">Login as a poster</Typography>
       <div className={classes.btnContainer}>
-        <a href="http://localhost:5000/auth/google" className={classes.link}>
-          <Button
-            variant="contained"
-            className={classes.google}
-            color="primary"
-          >
-            <div className={classes.icon}>
-              <i className="fab fa-google"></i>
-            </div>{' '}
-            Login with Google
-          </Button>
-        </a>
-        <a href="http://localhost:5000/auth/facebook" className={classes.link}>
-          <Button
-            variant="contained"
-            className={classes.facebook}
-            color="secondary"
-          >
-            <div className={classes.icon}>
-              <i className="fab fa-facebook"></i>
-            </div>
-            Login with Facebook
-          </Button>
-        </a>
+        <Button
+          variant="contained"
+          className={classes.facebook}
+          href="http://localhost:5000/auth/facebook"
+        >
+          <div className={classes.icon}>
+            <i className="fab fa-facebook"></i>
+          </div>
+          Login with Facebook
+        </Button>
+        <Button
+          href="http://localhost:5000/auth/google"
+          className={classes.button}
+        >
+          <img src={GoogleLogin} alt="google" className={classes.img} />
+        </Button>
       </div>
     </div>
   );

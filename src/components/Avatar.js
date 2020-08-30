@@ -43,7 +43,7 @@ const StyledBadge = withStyles((theme) => ({
 }))(Badge);
 
 function ProfilePic({ handleMenu }) {
-  const { user, isLoaded } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const classes = useStyles();
 
   return (

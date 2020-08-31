@@ -14,7 +14,7 @@ import {
   Button
 } from '@material-ui/core';
 import { UserContext } from '../context/UserContext';
-import ProfilePic from './Avatar';
+import ProfilePic from './ProfilePic';
 
 const useStyles = makeStyles((theme) => ({
   root: {

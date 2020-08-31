@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
   },
+  homeButton: {
+    color: '#fff',
+    padding: '5px',
+    paddingTop: '0'
+  },
   title: {
     flexGrow: 1,
     display: 'none',
@@ -98,14 +103,24 @@ export default function SearchAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Typography className={classes.titleMobile} variant="h6" noWrap>
-          <IconButton component={Link} to="/" aria-label="Home">
+          <IconButton
+            component={Link}
+            to="/"
+            aria-label="Home"
+            className={classes.homeButton}
+          >
             <HomeIcon />
           </IconButton>
           App Factory
         </Typography>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            <IconButton component={Link} to="/" aria-label="Home">
+            <IconButton
+              component={Link}
+              to="/"
+              aria-label="Home"
+              className={classes.homeButton}
+            >
               <HomeIcon />
             </IconButton>
             App Factory

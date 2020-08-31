@@ -2,13 +2,14 @@ import React from 'react';
 import AppBar from './components/AppBar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
-import EditIcon from '@material-ui/icons/Edit';
-import { CssBaseline, Fab } from '@material-ui/core';
+import NewPost from './pages/NewPost';
+import AddIcon from '@material-ui/icons/Add';
+import { CssBaseline, Fab, Zoom } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(2)
   }
@@ -24,16 +25,19 @@ export default function App() {
         <AppBar />
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/post/new" component={NewPost} />
         </Switch>
-        <Fab
-          component={Link}
-          to="/post/new"
-          className={classes.fab}
-          color="secondary"
-          aria-label="New Post"
-        >
-          <EditIcon />
-        </Fab>
+        <Zoom in={true}>
+          <Fab
+            component={Link}
+            to="/post/new"
+            className={classes.fab}
+            color="secondary"
+            aria-label="New Post"
+          >
+            <AddIcon />
+          </Fab>
+        </Zoom>
       </Router>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 
-function PrivateRoute({ component: Component, ...rest }) {
+export default function PrivateRoute({ component: Component, ...rest }) {
   const { user, isLoaded } = useContext(UserContext);
   return (
     <Route

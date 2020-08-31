@@ -1,13 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Typography } from '@material-ui/core';
-import GoogleLogin from './images/btn_google_signin_dark_normal_web.png';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import GoogleLogo from './images/google-logo.webp';
 
 const useStyles = makeStyles((theme) => ({
   facebook: {
     color: '#ffffff',
     backgroundColor: '#3b5998',
     margin: 15,
+    width: 250,
     '&:hover, &:focus': {
       backgroundColor: '#003069'
     }
@@ -25,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
     width: 250
   },
   img: {
-    width: '100%'
+    height: 22,
+    marginRight: 10
   },
   poster: {
     [theme.breakpoints.up(780)]: {
@@ -46,16 +49,16 @@ export default function PosterLogin() {
           className={classes.facebook}
           href="http://localhost:5000/auth/facebook"
         >
-          <div className={classes.icon}>
-            <i className="fab fa-facebook"></i>
-          </div>
+          <FacebookIcon className={classes.icon} />
           Login with Facebook
         </Button>
         <Button
+          variant="outlined"
           href="http://localhost:5000/auth/google"
           className={classes.button}
         >
-          <img src={GoogleLogin} alt="google" className={classes.img} />
+          <img src={GoogleLogo} alt="google" className={classes.img} />
+          Login with Google
         </Button>
       </div>
     </div>

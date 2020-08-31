@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Index() {
+  const classes = useStyles();
   return (
     <React.Fragment>
       <Container component={Paper} className={classes.root}>

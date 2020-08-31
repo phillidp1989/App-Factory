@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function DeveloperLogin() {
+export default function DeveloperLogin() {
   const classes = useStyles();
 
   return (
@@ -52,4 +52,3 @@ function DeveloperLogin() {
   );
 }
 
-export default DeveloperLogin;

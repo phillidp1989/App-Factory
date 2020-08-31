@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function PosterLogin() {
+export default function PosterLogin() {
   const classes = useStyles();
 
   return (
@@ -62,4 +62,3 @@ function PosterLogin() {
   );
 }
 
-export default PosterLogin;

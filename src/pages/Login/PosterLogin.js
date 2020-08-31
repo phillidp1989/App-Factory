@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Typography } from '@material-ui/core';
-import GoogleLogin from '../../images/btn_google_signin_dark_normal_web.png';
+import GoogleLogin from './images/btn_google_signin_dark_normal_web.png';
 
 const useStyles = makeStyles((theme) => ({
   facebook: {

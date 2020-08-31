@@ -19,7 +19,7 @@ export default function Index() {
     <Zoom in={true}>
       <Fab
         component={Link}
-        to="/post/new"
+        to="/posts/new"
         className={classes.fab}
         color="secondary"
         aria-label="New Post"

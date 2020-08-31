@@ -1,12 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Typography } from '@material-ui/core';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles((theme) => ({
   github: {
     color: '#ffffff',
     backgroundColor: '#333',
     margin: 15,
+    width: 250,
     "&:hover, &:focus": {
       backgroundColor: '#0c0c0c',
     }
@@ -42,9 +44,7 @@ export default function DeveloperLogin() {
           color="primary"
           href="http://localhost:5000/auth/github"
         >
-          <div className={classes.icon}>
-            <i className="fab fa-github"></i>
-          </div>{' '}
+          <GitHubIcon className={classes.icon} />
           Login with Github
         </Button>
       </div>

@@ -64,5 +64,3 @@ export default function ProfilePic({ handleMenu }) {
     </div>
   );
 }
-
-export default ProfilePic;

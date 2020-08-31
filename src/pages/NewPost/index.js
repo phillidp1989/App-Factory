@@ -45,6 +45,35 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Index() {
   const classes = useStyles();
+
+  const [postData, setPostData] = useState({
+    title: '',
+    summary: '',
+    description: '',
+    categories: [
+      {
+        name: 'Business',
+        checked: false
+      },
+      {
+        name: 'Design',
+        checked: false
+      },
+      {
+        name: 'Gaming',
+        checked: false
+      },
+      {
+        name: 'Journalism',
+        checked: false
+      },
+      {
+        name: 'Marketing',
+        checked: false
+      }
+    ],
+    technologies: []
+  });
   return (
     <React.Fragment>
       <Container component={Paper} className={classes.root}>

@@ -42,3 +42,21 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
+
+export default function Index() {
+  return (
+    <React.Fragment>
+      <Container component={Paper} className={classes.root}>
+      </Container>
+      <Zoom in={true}>
+        <Fab
+          href=""
+          className={classes.fab}
+          color="secondary"
+          aria-label="New Post"
+        >
+          <PostAddIcon />
+        </Fab>
+      </Zoom>
+    </React.Fragment>
+  );

@@ -74,9 +74,110 @@ export default function Index() {
     ],
     technologies: []
   });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPostData({ ...postData, [name]: value });
+  };
+
+  const handleCategory = (e) => {
+    const { name, checked } = e.target;
+    const { categories } = postData;
+    const i = categories.findIndex((obj) => obj.name === name);
+    const updatedCategories = [...categories];
+    updatedCategories[i] = { name, checked };
+    setPostData({
+      ...postData,
+      categories: updatedCategories
+    });
+  };
+
+  const chosenCategoryCount = postData.categories.filter(
+    ({ checked }) => checked
+  ).length;
+  const error = chosenCategoryCount > 2;
+
   return (
     <React.Fragment>
       <Container component={Paper} className={classes.root}>
+        <Typography variant="h4">Enter Your New App Idea:</Typography>
+        <br />
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={3}>
+            <TextField
+              required
+              fullWidth
+              id="title"
+              name="title"
+              label="Name"
+              value={postData.title}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              required
+              fullWidth
+              id="summary"
+              name="summary"
+              label="Brief summary"
+              value={postData.summary}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              Select all categories that apply:
+            </Typography>
+            <FormControl required fullWidth error={error} component="fieldset">
+              <FormLabel component="legend">Pick up to two</FormLabel>
+              <FormGroup row>
+                {postData.categories.map(({ name, checked }) => (
+                  <FormControlLabel
+                    key={name}
+                    label={name}
+                    control={
+                      <Checkbox
+                        name={name}
+                        checked={checked}
+                        onChange={handleCategory}
+                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                      />
+                    }
+                  />
+                ))}
+              </FormGroup>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Typography variant="h6">Enter detailed description:</Typography>
+            <CKEditor
+              editor={ClassicEditor}
+              onChange={(event, editor) => {
+                const description = editor.getData();
+                setPostData({ ...postData, description });
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Autocomplete
+              multiple
+              id="tags-standard"
+              options={technologies}
+              getOptionLabel={(option) => option.title}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="standard"
+                  label="Technologies required (optional)"
+                />
+              )}
+              onChange={(e, technologies) =>
+                setPostData({ ...postData, technologies })
+              }
+            />
+          </Grid>
+        </Grid>
       </Container>
       <Zoom in={true}>
         <Fab
@@ -90,3 +191,4 @@ export default function Index() {
       </Zoom>
     </React.Fragment>
   );
+}

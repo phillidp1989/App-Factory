@@ -59,7 +59,7 @@ export default function ProfilePic({ handleMenu }) {
         onMouseOver={handleMenu}
         onClick={handleMenu}
       >
-        <Avatar alt={user.displayName} src={user.avatar} />
+        <Avatar alt={user.displayName} src={`${user.avatar} | Open Menu`} />
       </StyledBadge>
     </div>
   );

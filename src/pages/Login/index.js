@@ -72,13 +72,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Index() {
   const classes = useStyles();
-  const [state, setState] = React.useState(false);
 
   return (
     <div className={classes.container}>
       <Grow
-        in={!state}
-        {...(!state ? { timeout: 2000 } : { timeout: 2000 })}
+        in={true}
+        timeout={2000}
       >
         <Card className={classes.root} variant="outlined">
           <CardContent>

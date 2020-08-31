@@ -1,0 +1,104 @@
+import React from 'react';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import technologies from './technologies.json';
+import {
+  Typography,
+  Grid,
+  TextField,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel
+} from '@material-ui/core';
+
+export default function PostForm({
+  postData,
+  setPostData,
+  handleChange,
+  handleCategory
+}) {
+  const chosenCategoryCount = postData.categories.filter(
+    ({ checked }) => checked
+  ).length;
+  const error = chosenCategoryCount > 2;
+
+  return (
+    <Grid container spacing={3}>
+      <Grid item xs={12} sm={3}>
+        <TextField
+          required
+          fullWidth
+          id="title"
+          name="title"
+          label="Name"
+          value={postData.title}
+          onChange={handleChange}
+        />
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        <TextField
+          required
+          fullWidth
+          id="summary"
+          name="summary"
+          label="Brief summary"
+          value={postData.summary}
+          onChange={handleChange}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="h6">Select all categories that apply:</Typography>
+        <FormControl required fullWidth error={error} component="fieldset">
+          <FormLabel component="legend">Pick up to two</FormLabel>
+          <FormGroup row>
+            {postData.categories.map(({ name, checked }) => (
+              <FormControlLabel
+                key={name}
+                label={name}
+                control={
+                  <Checkbox
+                    name={name}
+                    checked={checked}
+                    onChange={handleCategory}
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                  />
+                }
+              />
+            ))}
+          </FormGroup>
+        </FormControl>
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        <Typography variant="h6">Enter detailed description:</Typography>
+        <CKEditor
+          editor={ClassicEditor}
+          onChange={(event, editor) => {
+            const description = editor.getData();
+            setPostData({ ...postData, description });
+          }}
+        />
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        <Autocomplete
+          multiple
+          id="tags-standard"
+          options={technologies}
+          getOptionLabel={(option) => option.title}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="standard"
+              label="Technologies required (optional)"
+            />
+          )}
+          onChange={(e, technologies) =>
+            setPostData({ ...postData, technologies })
+          }
+        />
+      </Grid>
+    </Grid>
+  );
+}

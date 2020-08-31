@@ -14,13 +14,13 @@ export default function App() {
     <div className="App">
       <CssBaseline />
       <Router>
-        <AppBar />
         <Switch>
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute path="/posts/new" component={NewPost} />
           <GuestRoute path="/login" component={Login} />
-          <Route exact path="/" component={Home} />
+          <Route path="*" component={AppBar} />
         </Switch>
+        <Route exact path="/" component={Home} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/posts/new" component={NewPost} />
       </Router>
     </div>
   );

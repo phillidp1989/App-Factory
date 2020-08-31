@@ -2,13 +2,15 @@ import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 
-function GuestRoute({ component: Component, ...rest }) {
+export default function GuestRoute({ component: Component, ...rest }) {
   const { user, isLoaded } = useContext(UserContext);
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (user && isLoaded) {
+        if (!isLoaded) {
+          return null;
+        } else if (user && isLoaded) {
           return (
             <Redirect to={{ pathname: '/', state: { from: props.location } }} />
           );
@@ -18,5 +20,3 @@ function GuestRoute({ component: Component, ...rest }) {
     />
   );
 }
-
-export default GuestRoute;

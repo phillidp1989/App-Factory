@@ -77,7 +77,7 @@ export default function Index() {
   return (
     <div className={classes.container}>
       <Grow
-        in={!state}
+        in={true}
         {...(!state ? { timeout: 2000 } : { timeout: 2000 })}
       >
         <Card className={classes.root} variant="outlined">

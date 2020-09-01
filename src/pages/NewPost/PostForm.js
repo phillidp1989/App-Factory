@@ -20,6 +20,7 @@ export default function PostForm({
   handleChange,
   handleCategory,
   err,
+  setErr,
   inputErrCheck
 }) {
   return (
@@ -55,7 +56,7 @@ export default function PostForm({
         <FormControl
           required
           fullWidth
-          error={err.categories}
+          error={err.categories || err.categoriesOverLimit}
           component="fieldset"
         >
           <FormLabel component="legend">Pick up to two</FormLabel>
@@ -78,12 +79,19 @@ export default function PostForm({
         </FormControl>
       </Grid>
       <Grid item xs={12} sm={12}>
-        <Typography variant="h6">Enter detailed description:</Typography>
+        <Typography variant="h6" color={err.description ? 'error' : 'initial'}>
+          Enter detailed description*:
+        </Typography>
         <CKEditor
           editor={ClassicEditor}
           onChange={(event, editor) => {
             const description = editor.getData();
             setPostData({ ...postData, description });
+            setErr({ ...err, description: description.length === 0 });
+          }}
+          onBlur={(event, editor) => {
+            const description = editor.getData();
+            if (description.length === 0) setErr({ ...err, description: true });
           }}
         />
       </Grid>

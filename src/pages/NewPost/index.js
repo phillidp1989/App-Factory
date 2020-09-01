@@ -109,10 +109,18 @@ export default function Index() {
 
   const postForm = () => {
     // Checking if err state is true and returning key if so
-    const errCheck = (err, { title, summary, description }) => {
     const errCheck = (err, { title, summary, description, categories }) => {
+      // These checks need to be separate so the inputs don't flag errors on page load
       // Check if user interacted with form at all
       if (title + summary + description === '') return 'something';
+
+      // Making sure user hasn't interacted with a single value
+      if (title.length === 0) return 'title';
+      if (summary.length === 0) return 'summary';
+      if (description.length === 0) return 'description';
+      const chosenCategoryCount = categories.filter(({ checked }) => checked)
+        .length;
+      if (chosenCategoryCount === 0) return 'categories';
 
       // Otherwise check if any of the err state === true
       for (let key in err) {
@@ -157,6 +165,7 @@ export default function Index() {
             handleCategory={handleCategory}
             inputErrCheck={inputErrCheck}
             err={err}
+            setErr={setErr}
           />
         </Container>
       </Grow>

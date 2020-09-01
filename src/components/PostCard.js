@@ -156,11 +156,13 @@
 //   );
 // }
 
+// ABOVE:  MATERIAL UI CARD
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
+// BELOW MATERIAL UI ACCORDION
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -174,6 +176,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
 
 const myProjects = [
   {
@@ -206,9 +209,10 @@ const myProjects = [
   }
 ];
 
+// Material UI Accordion
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%'
+    width: '90vw'
   },
   heading: {
     fontSize: theme.typography.pxToRem(15)
@@ -238,62 +242,86 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       textDecoration: 'underline'
     }
+  },
+  // Material UI Grid:
+  paper: {
+    height: 140,
+    width: 100
+  },
+  control: {
+    padding: theme.spacing(2)
   }
 }));
 
 export default function DetailedAccordion() {
+  // Material UI Accordion
   const classes = useStyles();
+  // Material UI Grid
+  const [spacing, setSpacing] = React.useState(2);
+  const handleChange = (event) => {
+    setSpacing(Number(event.target.value));
+  };
 
   return (
-    <React.Fragment>
-      {myProjects.map((project) => (
-        <div className={classes.root}>
-          <Accordion defaultExpanded>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1c-content"
-              id="panel1c-header"
-            >
-              <div className={classes.column}>
-                <Typography className={classes.heading}>
-                  {project.title}
-                </Typography>
-              </div>
-              <div className={classes.column}>
-                <Typography className={classes.secondaryHeading}>
-                  {project.description}
-                </Typography>
-              </div>
-            </AccordionSummary>
-            <AccordionDetails className={classes.details}>
-              <div className={classes.column} />
-              <div className={classes.column}>
-                <Chip label="Barbados" onDelete={() => {}} />
-              </div>
-              <div className={clsx(classes.column, classes.helper)}>
-                <Typography variant="caption">
-                  {project.details}
-                  <br />
-                  <a
-                    href="#secondary-heading-and-columns"
-                    className={classes.link}
-                  >
-                    Learn more
-                  </a>
-                </Typography>
-              </div>
-            </AccordionDetails>
-            <Divider />
-            <AccordionActions>
-              <Button size="small">Cancel</Button>
-              <Button size="small" color="primary">
-                Save
-              </Button>
-            </AccordionActions>
-          </Accordion>
-        </div>
-      ))}
-      ;
-    </React.Fragment>
+    <Grid
+      container
+      spacing={3}
+      direction="column"
+      justify="center"
+      alignItems="center"
+    >
+      <Grid item xs={12} sm={12} md={12}>
+        {myProjects.map((project) => (
+          <React.Fragment>
+            <div className={classes.root}>
+              <Accordion defaultExpanded>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1c-content"
+                  id="panel1c-header"
+                >
+                  <div className={classes.column}>
+                    <Typography className={classes.heading}>
+                      {project.title}
+                    </Typography>
+                  </div>
+                  <div className={classes.column}>
+                    <Typography className={classes.secondaryHeading}>
+                      {project.description}
+                    </Typography>
+                  </div>
+                </AccordionSummary>
+                <AccordionDetails className={classes.details}>
+                  <div className={classes.column} />
+                  <div className={classes.column}>
+                    <Chip label="Barbados" onDelete={() => {}} />
+                  </div>
+                  <div className={clsx(classes.column, classes.helper)}>
+                    <Typography variant="caption">
+                      {project.details}
+                      <br />
+                      <a
+                        href="#secondary-heading-and-columns"
+                        className={classes.link}
+                      >
+                        Learn more
+                      </a>
+                    </Typography>
+                  </div>
+                </AccordionDetails>
+                <Divider />
+                <AccordionActions>
+                  <Button size="small">Cancel</Button>
+                  <Button size="small" color="primary">
+                    Save
+                  </Button>
+                </AccordionActions>
+              </Accordion>
+            </div>
+          </React.Fragment>
+        ))}
+        ;
+      </Grid>
+    </Grid>
   );
 }

@@ -19,11 +19,19 @@ export default function AlertDialog({ isAlertOpen, setAlert, errorKey }) {
         aria-describedby="There is something wrong."
       >
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {`You need to add ${
-              errorKey === 'categories' || errorKey === 'something' ? '' : 'a '
-            }${errorKey}`}
-          </DialogContentText>
+          {errorKey === 'categoriesOverLimit' ? (
+            <DialogContentText id="alert-dialog-description">
+              Too many categories selected.
+            </DialogContentText>
+          ) : (
+            <DialogContentText id="alert-dialog-description">
+              {`You need to add ${
+                errorKey === 'categories' || errorKey === 'something'
+                  ? ''
+                  : 'a '
+              }${errorKey}`}
+            </DialogContentText>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary" autoFocus>

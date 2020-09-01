@@ -70,7 +70,9 @@ export default function Index() {
   const [err, setErr] = useState({
     title: false,
     summary: false,
-    categories: false
+    categories: false,
+    categoriesOverLimit: false,
+    description: false
   });
 
   const [alert, setAlert] = useState({
@@ -100,13 +102,15 @@ export default function Index() {
     ).length;
     setErr((e) => ({
       ...e,
-      categories: chosenCategoryCount > 2 || chosenCategoryCount === 0
+      categories: chosenCategoryCount === 0,
+      categoriesOverLimit: chosenCategoryCount > 2
     }));
   };
 
   const postForm = () => {
     // Checking if err state is true and returning key if so
     const errCheck = (err, { title, summary, description }) => {
+    const errCheck = (err, { title, summary, description, categories }) => {
       // Check if user interacted with form at all
       if (title + summary + description === '') return 'something';
 

@@ -66,6 +66,12 @@ export default function Index() {
     technologies: []
   });
 
+  const [err, setErr] = useState({
+    title: false,
+    summary: false,
+    categories: false
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPostData({ ...postData, [name]: value });
@@ -81,6 +87,22 @@ export default function Index() {
       ...postData,
       categories: updatedCategories
     });
+
+    //Checking for errors
+    const chosenCategoryCount = updatedCategories.filter(
+      ({ checked }) => checked
+    ).length;
+    setErr((e) => ({
+      ...e,
+      categories: chosenCategoryCount > 2 || chosenCategoryCount === 0
+    }));
+  };
+
+
+  const inputErrCheck = (e) => {
+    const { name, value } = e.target;
+    // Setting error state if required input changes to empty
+    setErr({ ...err, [name]: value.length === 0 });
   };
 
   return (
@@ -94,6 +116,8 @@ export default function Index() {
             setPostData={setPostData}
             handleChange={handleChange}
             handleCategory={handleCategory}
+            inputErrCheck={inputErrCheck}
+            err={err}
           />
         </Container>
       </Grow>

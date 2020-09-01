@@ -18,13 +18,10 @@ export default function PostForm({
   postData,
   setPostData,
   handleChange,
-  handleCategory
+  handleCategory,
+  err,
+  inputErrCheck
 }) {
-  const chosenCategoryCount = postData.categories.filter(
-    ({ checked }) => checked
-  ).length;
-  const error = chosenCategoryCount > 2;
-
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={3}>
@@ -36,6 +33,8 @@ export default function PostForm({
           label="Name"
           value={postData.title}
           onChange={handleChange}
+          onBlur={inputErrCheck}
+          error={err.title}
         />
       </Grid>
       <Grid item xs={12} sm={12}>
@@ -47,11 +46,18 @@ export default function PostForm({
           label="Brief summary"
           value={postData.summary}
           onChange={handleChange}
+          onBlur={inputErrCheck}
+          error={err.summary}
         />
       </Grid>
       <Grid item xs={12}>
         <Typography variant="h6">Select all categories that apply:</Typography>
-        <FormControl required fullWidth error={error} component="fieldset">
+        <FormControl
+          required
+          fullWidth
+          error={err.categories}
+          component="fieldset"
+        >
           <FormLabel component="legend">Pick up to two</FormLabel>
           <FormGroup row>
             {postData.categories.map(({ name, checked }) => (

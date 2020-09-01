@@ -48,7 +48,7 @@ const myProjects = [
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: '70vw'
+    maxWidth: '90vw'
   },
   media: {
     height: 0,
@@ -67,9 +67,9 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500]
   },
-  // from the spacing grid
+  // from the Material UI spacing grid
   control: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(10)
   }
 }));
 
@@ -96,7 +96,7 @@ export default function PostCard() {
       justify="center"
       alignItems="center"
     >
-      <Grid item xs={12} sm={12} md={12} spacing={2}>
+      <Grid item xs={12} sm={12} md={12} spacing={10}>
         <Card className={classes.root}>
           {myProjects.map((project) => (
             <React.Fragment>
@@ -111,6 +111,7 @@ export default function PostCard() {
                     <MoreVertIcon />
                   </IconButton>
                 }
+                key={project.title}
                 title={project.title}
                 subheader="September 14, 2016"
               />

@@ -19,6 +19,37 @@ import Grid from '@material-ui/core/Grid';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+const myProjects = [
+  {
+    title: 'BURGER APP',
+    tech: 'NodeJS - JS - Express - Handlebars - ORM - MySQL - Heroku',
+    description:
+      'Burger App is an application that allows one to order a specific burger and then devour it',
+    details:
+      'More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More'
+  },
+  {
+    title: 'EMPLOYEE SUMMARY',
+    tech: 'NodeJS - JS',
+    description: "A CLI webapp to build a team's organization chart",
+    details:
+      'More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More'
+  },
+  {
+    title: 'THE MUSIC APP',
+    tech: 'jQuery - LastFM & audd.io API - Materialize',
+    description:
+      'A webapp to find every information you need on your favourite music'
+  },
+  {
+    title: 'WEATHER APP',
+    tech: 'HTML - CSS - JavaScript - OpenWeather API',
+    description: 'A webapp to quickly check the weather anywhere on the planet',
+    details:
+      'More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More'
+  }
+];
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '70vw'
@@ -58,66 +89,61 @@ export default function PostCard() {
       justify="center"
       alignItems="center"
     >
-      <Grid item xs={12} sm={3}>
+      <Grid item xs={12} sm={12} md={12}>
         <Card className={classes.root}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="post" className={classes.avatar}>
-                P
-              </Avatar>
-            }
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            }
-            title="Fitness Tracker"
-            subheader="September 14, 2016"
-          />
-          {/* <CardMedia
-        className={classes.media}
-        image="../images/randomDemoImage.jpg"
-        title="Fitness Tracker"
-      /> */}
-          <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              This is a fitness app idea
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon />
-            </IconButton>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Typography paragraph>More About:</Typography>
-              <Typography paragraph>
-                More About this Idea - More About this Idea- More About this
-                Idea
-              </Typography>
-              <Typography paragraph>
-                More About this Idea - More About this Idea- More About this
-                Idea More About this Idea - More About this Idea- More About
-                this Idea More About this Idea - More About this Idea- More
-                About this Idea More About this Idea - More About this Idea-
-                More About this Idea
-              </Typography>
-            </CardContent>
-          </Collapse>
+          {myProjects.map((project) => (
+            <React.Fragment>
+              <CardHeader
+                avatar={
+                  <Avatar aria-label="post" className={classes.avatar}>
+                    P
+                  </Avatar>
+                }
+                action={
+                  <IconButton aria-label="settings">
+                    <MoreVertIcon />
+                  </IconButton>
+                }
+                title={myProjects.title}
+                subheader="September 14, 2016"
+              />
+
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {myProjects.description}
+                </Typography>
+              </CardContent>
+              <CardActions disableSpacing>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+                <IconButton
+                  className={clsx(classes.expand, {
+                    [classes.expandOpen]: expanded
+                  })}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label="show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </CardActions>
+              <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                  <Typography paragraph>More About:</Typography>
+                  <Typography paragraph>
+                    More About this Idea - More About this Idea- More About this
+                    Idea
+                  </Typography>
+                  <Typography paragraph>{myProjects.details}</Typography>
+                </CardContent>
+              </Collapse>
+            </React.Fragment>
+          ))}
+          ;
         </Card>
       </Grid>
     </Grid>

@@ -18,6 +18,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
 const myProjects = [
   {
@@ -70,26 +71,37 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  // from the spacing grid
+  control: {
+    padding: theme.spacing(2)
   }
 }));
 
 export default function PostCard() {
+  // Material UI card
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  // Material UI spacing
+  const [spacing, setSpacing] = React.useState(2);
+
+  const handleChange = (event) => {
+    setSpacing(Number(event.target.value));
+  };
 
   return (
     <Grid
       container
       spacing={3}
-      direction="row"
+      direction="column"
       justify="center"
       alignItems="center"
     >
-      <Grid item xs={12} sm={12} md={12}>
+      <Grid item xs={12} sm={12} md={12} spacing={2}>
         <Card className={classes.root}>
           {myProjects.map((project) => (
             <React.Fragment>
@@ -104,18 +116,18 @@ export default function PostCard() {
                     <MoreVertIcon />
                   </IconButton>
                 }
-                title={myProjects.title}
+                title={project.title}
                 subheader="September 14, 2016"
               />
 
               <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  {myProjects.description}
+                  {project.description}
                 </Typography>
               </CardContent>
               <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
-                  <FavoriteIcon />
+                  <ThumbUpAltIcon />
                 </IconButton>
                 <IconButton aria-label="share">
                   <ShareIcon />
@@ -134,11 +146,8 @@ export default function PostCard() {
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                   <Typography paragraph>More About:</Typography>
-                  <Typography paragraph>
-                    More About this Idea - More About this Idea- More About this
-                    Idea
-                  </Typography>
-                  <Typography paragraph>{myProjects.details}</Typography>
+                  <Typography paragraph>{project.details}</Typography>
+                  {/* <Typography paragraph>{project.details}</Typography> */}
                 </CardContent>
               </Collapse>
             </React.Fragment>

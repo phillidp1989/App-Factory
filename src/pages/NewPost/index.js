@@ -98,6 +98,35 @@ export default function Index() {
     }));
   };
 
+  const postForm = () => {
+    // Checking if err state is true and returning key if so
+    const errCheck = (err, { title, summary, description }) => {
+      // Check if user interacted with form at all
+      if (title + summary + description === '') return 'something';
+
+      // Otherwise check if any of the err state === true
+      for (let key in err) {
+        if (err.hasOwnProperty(key) && err[key] === true) {
+          return key;
+        }
+      }
+      return false;
+    };
+
+    const errKey = errCheck(err, postData);
+    if (errKey !== false) {
+      alert(`Add ${errKey}.`);
+      return;
+    }
+
+    // Filtering categories to array of strings
+    const categories = postData.categories
+      .filter(({ checked }) => checked)
+      .map(({ name }) => name);
+
+    const newPost = { ...postData, categories };
+    console.log(newPost);
+  };
 
   const inputErrCheck = (e) => {
     const { name, value } = e.target;
@@ -123,7 +152,7 @@ export default function Index() {
       </Grow>
       <Zoom in={true}>
         <Fab
-          href=""
+          onClick={postForm}
           className={classes.fab}
           color="secondary"
           aria-label="New Post"

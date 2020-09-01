@@ -30,7 +30,7 @@ export default function PostForm({
           fullWidth
           id="title"
           name="title"
-          label="Name"
+          label="Title"
           value={postData.title}
           onChange={handleChange}
           onBlur={inputErrCheck}

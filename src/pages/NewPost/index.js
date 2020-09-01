@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 import PostForm from './PostForm';
+import ErrorAlert from './ErrorAlert';
 import {
   Container,
   Paper,
@@ -72,6 +73,11 @@ export default function Index() {
     categories: false
   });
 
+  const [alert, setAlert] = useState({
+    open: false,
+    key: ''
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPostData({ ...postData, [name]: value });
@@ -113,9 +119,9 @@ export default function Index() {
       return false;
     };
 
-    const errKey = errCheck(err, postData);
-    if (errKey !== false) {
-      alert(`Add ${errKey}.`);
+    const key = errCheck(err, postData);
+    if (key !== false) {
+      setAlert({ open: true, key });
       return;
     }
 
@@ -150,6 +156,11 @@ export default function Index() {
           />
         </Container>
       </Grow>
+      <ErrorAlert
+        isAlertOpen={alert.open}
+        setAlert={setAlert}
+        errorKey={alert.key}
+      />
       <Zoom in={true}>
         <Fab
           onClick={postForm}

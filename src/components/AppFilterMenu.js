@@ -19,7 +19,7 @@ export default function SimpleMenu() {
     <Grid
       container
       spacing={3}
-      direction="row"
+      direction="column"
       justify="center"
       alignItems="center"
     >

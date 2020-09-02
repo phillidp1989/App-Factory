@@ -56,7 +56,6 @@ export default function ProfilePic({ handleMenu }) {
           horizontal: 'right'
         }}
         variant="dot"
-        onMouseOver={handleMenu}
         onClick={handleMenu}
       >
         <Avatar alt={user.displayName} src={user.avatar || 'Open Menu'} />

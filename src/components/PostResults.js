@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PostCard from './PostCard';
-import postData from './x';
+import postData from './dummyData';
 import { Grid } from '@material-ui/core';
 
 export default function PostResults() {

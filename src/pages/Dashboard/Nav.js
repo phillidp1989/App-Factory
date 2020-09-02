@@ -1,12 +1,10 @@
 import React from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import TabPanel from './TabPanel';
+import { AppBar, Tabs, Tab } from '@material-ui/core';
 
-const generateProps = (index) => ({
+const a11yProps = (index) => ({
   id: `full-width-tab-${index}`,
   'aria-controls': `full-width-tabpanel-${index}`
 });
@@ -42,8 +40,8 @@ export default function Nav() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Summary" {...generateProps(0)} />
-          <Tab label="Posts" {...generateProps(1)} />
+          <Tab label="Summary" {...a11yProps(0)} />
+          <Tab label="Posts" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <SwipeableViews

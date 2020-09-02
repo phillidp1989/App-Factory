@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from 'react-router-dom';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  InputBase,
+  Menu,
+  MenuItem,
+  Button
+} from '@material-ui/core';
+import { UserContext } from '../context/UserContext';
+import ProfilePic from './ProfilePic';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
+  },
+  homeButton: {
+    color: '#fff',
+    padding: '5px',
+    paddingTop: '0'
   },
   title: {
     flexGrow: 1,
@@ -72,19 +80,22 @@ const useStyles = makeStyles((theme) => ({
         width: '20ch'
       }
     }
+  },
+  link: {
+    textDecoration: 'none !important',
+    color: 'black'
+  },
+  pointer: {
+    cursor: 'pointer'
   }
 }));
 
 export default function SearchAppBar() {
+  const { user, isLoaded } = useContext(UserContext);
   const classes = useStyles();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
-  const login = (newState) => {
-    setIsLoggedIn(newState);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -98,14 +109,24 @@ export default function SearchAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Typography className={classes.titleMobile} variant="h6" noWrap>
-          <IconButton component={Link} to="/" aria-label="Home">
+          <IconButton
+            component={Link}
+            to="/"
+            aria-label="Home"
+            className={classes.homeButton}
+          >
             <HomeIcon />
           </IconButton>
           App Factory
         </Typography>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            <IconButton component={Link} to="/" aria-label="Home">
+            <IconButton
+              component={Link}
+              to="/"
+              aria-label="Home"
+              className={classes.homeButton}
+            >
               <HomeIcon />
             </IconButton>
             App Factory
@@ -123,28 +144,22 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          {isLoggedIn ? (
+          {user && isLoaded ? (
             <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+              <ProfilePic handleMenu={handleMenu} />
               <Menu
                 id="menu-appbar"
+                className={classes.pointer}
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
+                  vertical: 'bottom',
+                  horizontal: 'center'
                 }}
                 keepMounted
+                getContentAnchorEl={null}
                 transformOrigin={{
                   vertical: 'top',
-                  horizontal: 'right'
+                  horizontal: 'center'
                 }}
                 open={open}
                 onClose={handleClose}
@@ -157,21 +172,30 @@ export default function SearchAppBar() {
                 >
                   My dashboard
                 </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    handleClose();
-                    login(false);
-                  }}
+                <a
+                  href="http://localhost:5000/auth/logout"
+                  className={classes.link}
                 >
-                  Logout
-                </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                </a>
               </Menu>
             </div>
           ) : (
-            <Button onClick={(e) => login(true)} color="inherit">
-              Login
-            </Button>
-          )}
+              <Button
+                component={Link}
+                to="/login"
+                aria-label="Login"
+                color="inherit"
+              >
+                Login
+              </Button>
+            )}
         </Toolbar>
       </AppBar>
     </div>

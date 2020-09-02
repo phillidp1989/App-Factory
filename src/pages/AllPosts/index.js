@@ -1,18 +1,14 @@
 import React from 'react';
-// import Nav from './Nav';
 import AppFilterMenu from '../../components/AppFilterMenu';
-// import PostCard from '../../components/PostCard';
 import PostResults from '../../components/PostResults';
-// import DetailedAccordion from '../../components/PostCard';
-// import AppBar from '../../components/AppBar';
 import './style.css';
+import { Grid } from '@material-ui/core';
 
 export default function Index() {
   return (
-    <React.Fragment>
+    <Grid container justify="center" alignItems="center">
       <AppFilterMenu />
       <PostResults />
-      {/* <DetailedAccordion /> */}
-    </React.Fragment>
+    </Grid>
   );
 }

@@ -15,42 +15,9 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
-const myProjects = [
-  {
-    title: 'BURGER APP',
-    tech: 'NodeJS - JS - Express - Handlebars - ORM - MySQL - Heroku',
-    description:
-      'Burger App is an application that allows one to order a specific burger and then devour it',
-    details:
-      'More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More'
-  },
-  {
-    title: 'EMPLOYEE SUMMARY',
-    tech: 'NodeJS - JS',
-    description: "A CLI webapp to build a team's organization chart",
-    details:
-      'More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More'
-  },
-  {
-    title: 'THE MUSIC APP',
-    tech: 'jQuery - LastFM & audd.io API - Materialize',
-    description:
-      'A webapp to find every information you need on your favourite music',
-    details:
-      'More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More'
-  },
-  {
-    title: 'WEATHER APP',
-    tech: 'HTML - CSS - JavaScript - OpenWeather API',
-    description: 'A webapp to quickly check the weather anywhere on the planet',
-    details:
-      'More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More About this Idea More About this Idea - More About this Idea- More'
-  }
-];
-
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: '90vw'
+    width: '100%'
   },
   media: {
     height: 0,
@@ -68,10 +35,6 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: red[500]
-  },
-  // from the Material UI spacing grid
-  control: {
-    padding: theme.spacing(10)
   }
 }));
 
@@ -92,68 +55,54 @@ export default function PostCard({ title, description, details }) {
   // };
 
   return (
-    <Grid
-      container
-      spacing={10}
-      direction="column"
-      justify="center"
-      alignItems="center"
-    >
-      <Grid item xs={12} sm={12} md={12}>
-        <Card className={classes.root}>
-          {/* {myProjects.map((project) => ( */}
-          <React.Fragment>
-            <CardHeader
-              avatar={
-                <Avatar aria-label="post" className={classes.avatar}>
-                  P
-                </Avatar>
-              }
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              }
-              key={title}
-              title={title}
-              subheader="September 14, 2016"
-            />
+    <Card className={classes.root}>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="post" className={classes.avatar}>
+            P
+          </Avatar>
+        }
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+        key={title}
+        title={title}
+        subheader="September 14, 2016"
+      />
 
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {description}
-              </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
-              <IconButton aria-label="thumb up">
-                <ThumbUpAltIcon />
-              </IconButton>
-              {/* <IconButton aria-label="share">
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {description}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label="thumb up">
+          <ThumbUpAltIcon />
+        </IconButton>
+        {/* <IconButton aria-label="share">
                   <ShareIcon />
                 </IconButton> */}
-              <IconButton
-                className={clsx(classes.expand, {
-                  [classes.expandOpen]: expanded
-                })}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-              >
-                <ExpandMoreIcon />
-              </IconButton>
-            </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <CardContent>
-                <Typography paragraph>More About:</Typography>
-                <Typography paragraph>{details}</Typography>
-                {/* <Typography paragraph>{project.details}</Typography> */}
-              </CardContent>
-            </Collapse>
-          </React.Fragment>
-          {/* ))} */};
-        </Card>
-      </Grid>
-    </Grid>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography paragraph>More About:</Typography>
+          <Typography paragraph>{details}</Typography>
+          {/* <Typography paragraph>{project.details}</Typography> */}
+        </CardContent>
+      </Collapse>
+    </Card>
   );
 }
 

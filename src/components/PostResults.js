@@ -1,22 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import PostCard from './PostCard';
-import { PostContext } from './PostContext';
+import postData from './x';
+import { Grid } from '@material-ui/core';
 
 export default function PostResults() {
-  const { posts } = useContext(PostContext);
+  const [posts, setPost] = useState([]);
+  useEffect(() => {
+    setPost(postData);
+  }, []);
 
   return (
-    <div className="row">
+    <React.Fragment>
       {posts.map((post) => (
-        <React.Fragment>
+        <Grid item xs={12}>
           <PostCard
             key={post.title}
             title={post.title}
             description={post.description}
             details={post.details}
           />
-        </React.Fragment>
+        </Grid>
       ))}
-    </div>
+    </React.Fragment>
   );
 }

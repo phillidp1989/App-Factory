@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#ffffff',
     backgroundColor: '#3b5998',
     margin: 15,
-    width: 250,
+    width: 270,
     '&:hover, &:focus': {
       backgroundColor: '#003069'
     }
@@ -42,7 +42,7 @@ export default function PosterLogin() {
 
   return (
     <div className={classes.poster}>
-      <Typography variant="h6">Login as a poster</Typography>
+      <Typography variant="h6">Sign up or login as a poster</Typography>
       <div className={classes.btnContainer}>
         <Button
           variant="contained"
@@ -50,7 +50,7 @@ export default function PosterLogin() {
           href="http://localhost:5000/auth/facebook"
         >
           <FacebookIcon className={classes.icon} />
-          Login with Facebook
+          Continue with Facebook
         </Button>
         <Button
           variant="outlined"
@@ -58,7 +58,7 @@ export default function PosterLogin() {
           className={classes.button}
         >
           <img src={GoogleLogo} alt="google" className={classes.img} />
-          Login with Google
+          Continue with Google
         </Button>
       </div>
     </div>

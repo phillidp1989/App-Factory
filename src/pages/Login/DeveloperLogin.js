@@ -35,7 +35,7 @@ export default function DeveloperLogin() {
   return (
     <div className={classes.developer}>
       <Typography variant="h6">
-        Login as a developer
+        Sign up or login as a developer
       </Typography>
       <div className={classes.btnContainer}>
         <Button
@@ -45,7 +45,7 @@ export default function DeveloperLogin() {
           href="http://localhost:5000/auth/github"
         >
           <GitHubIcon className={classes.icon} />
-          Login with Github
+          Continue with Github
         </Button>
       </div>
     </div>

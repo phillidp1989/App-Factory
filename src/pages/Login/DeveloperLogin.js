@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#ffffff',
     backgroundColor: '#333',
     margin: 15,
-    width: 250,
+    width: 270,
     "&:hover, &:focus": {
       backgroundColor: '#0c0c0c',
     }

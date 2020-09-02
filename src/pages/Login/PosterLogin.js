@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: 10
   },
-  button: {
-    width: 250
+  google: {
+    width: 270
   },
   img: {
     height: 22,
@@ -55,7 +55,7 @@ export default function PosterLogin() {
         <Button
           variant="outlined"
           href="http://localhost:5000/auth/google"
-          className={classes.button}
+          className={classes.google}
         >
           <img src={GoogleLogo} alt="google" className={classes.img} />
           Continue with Google

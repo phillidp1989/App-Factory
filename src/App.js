@@ -16,11 +16,11 @@ export default function App() {
       <CssBaseline />
       <Router>
         <Switch>
-          <Route exact path="/allposts" component={AllPosts} />
           <GuestRoute path="/login" component={Login} />
           <Route path="*" component={AppBar} />
         </Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/allposts" component={AllPosts} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/posts/new" component={NewPost} />
       </Router>

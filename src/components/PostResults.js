@@ -4,7 +4,6 @@ import postData from './dummyData';
 import { Grid } from '@material-ui/core';
 
 export default function PostResults() {
-  const classes = useStyles();
   const [posts, setPost] = useState([]);
   useEffect(() => {
     setPost(postData);
@@ -13,7 +12,7 @@ export default function PostResults() {
   return (
     <React.Fragment>
       {posts.map((post) => (
-        <Grid item xs={12} className={classes.root}>
+        <Grid item xs={12}>
           <PostCard
             key={post.title}
             title={post.title}

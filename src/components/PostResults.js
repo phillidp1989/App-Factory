@@ -20,7 +20,7 @@ export default function PostResults() {
   return (
     <React.Fragment>
       {posts.map((post) => (
-        <Grid item xs={12}>
+        <Grid item xs={12} className={classes.root}>
           <PostCard
             key={post.title}
             title={post.title}

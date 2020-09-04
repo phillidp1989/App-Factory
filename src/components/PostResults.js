@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 export default function PostResults() {
+  const classes = useStyles();
   const [posts, setPost] = useState([]);
   useEffect(() => {
     setPost(postData);

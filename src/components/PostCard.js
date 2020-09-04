@@ -16,7 +16,8 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%'
+    width: '90%',
+    marginBottom: 20
   },
   media: {
     height: 0,

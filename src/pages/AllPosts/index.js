@@ -6,7 +6,7 @@ import { Grid } from '@material-ui/core';
 
 export default function Index() {
   return (
-    <Grid container justify="center" alignItems="center">
+    <Grid container justify="center" alignItems="center" spacing={20}>
       <AppFilterMenu />
       <PostResults />
     </Grid>

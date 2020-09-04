@@ -2,7 +2,6 @@ import React from 'react';
 import AppBar from './components/AppBar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AllPosts from './pages/AllPosts';
-import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import NewPost from './pages/NewPost';
 import Login from './pages/Login';

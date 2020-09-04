@@ -16,7 +16,7 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '90%',
+    width: '100%',
     marginBottom: 20
   },
   media: {
@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  control: {
+    padding: theme.spacing(2)
   }
 }));
 

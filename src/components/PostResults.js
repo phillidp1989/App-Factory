@@ -12,9 +12,8 @@ export default function PostResults() {
   return (
     <React.Fragment>
       {posts.map((post) => (
-        <Grid item xs={10} spacing={2}>
+        <Grid key={post.title} item xs={10}>
           <PostCard
-            key={post.title}
             title={post.title}
             description={post.description}
             details={post.details}

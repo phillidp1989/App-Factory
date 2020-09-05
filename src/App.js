@@ -18,7 +18,7 @@ export default function App() {
           <GuestRoute path="/login" component={Login} />
           <Route path="*" component={AppBar} />
         </Switch>
-        <Route exact path="/allposts" component={AllPosts} />
+        <Route exact path="/" component={AllPosts} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/posts/new" component={NewPost} />
       </Router>

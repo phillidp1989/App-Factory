@@ -8,6 +8,9 @@ import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: theme.spacing(4)
+  },
   fab: {
     position: 'fixed',
     bottom: theme.spacing(2),
@@ -24,6 +27,7 @@ export default function Index() {
         container
         justify="center"
         alignItems="center"
+        className={classes.root}
       >
         <AppFilterMenu />
         <PostResults />

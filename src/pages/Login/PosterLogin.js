@@ -47,14 +47,14 @@ export default function PosterLogin() {
         <Button
           variant="contained"
           className={classes.facebook}
-          href="http://localhost:5000/auth/facebook"
+          href="https://app-factory-api.herokuapp.com/auth/facebook"
         >
           <FacebookIcon className={classes.icon} />
           Continue with Facebook
         </Button>
         <Button
           variant="outlined"
-          href="http://localhost:5000/auth/google"
+          href="https://app-factory-api.herokuapp.com/auth/google"
           className={classes.google}
         >
           <img src={GoogleLogo} alt="google" className={classes.img} />

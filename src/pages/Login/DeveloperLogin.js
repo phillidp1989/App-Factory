@@ -42,7 +42,7 @@ export default function DeveloperLogin() {
           variant="contained"
           className={classes.github}
           color="primary"
-          href="http://localhost:5000/auth/github"
+          href="https://app-factory-api.herokuapp.com/auth/github"
         >
           <GitHubIcon className={classes.icon} />
           Continue with Github

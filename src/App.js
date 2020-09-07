@@ -2,6 +2,7 @@ import React from 'react';
 import AppBar from './components/AppBar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AllPosts from './pages/AllPosts';
+import UserPosts from './pages/UserPage';
 import Dashboard from './pages/Dashboard';
 import NewPost from './pages/NewPost';
 import Login from './pages/Login';
@@ -21,6 +22,7 @@ export default function App() {
         <Route exact path="/allposts" component={AllPosts} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/posts/new" component={NewPost} />
+        <Route path="/userposts" component={UserPosts} />
       </Router>
     </div>
   );

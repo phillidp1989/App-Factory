@@ -5,7 +5,7 @@ export default {
     try {
       return await axios.request({
         method: 'GET',
-        url: '/allposts',
+        url: 'https://app-factory-api.herokuapp.com/api/posts',
         data: query
       });
     } catch (err) {
@@ -17,7 +17,8 @@ export default {
     try {
       return await axios.request({
         method: 'GET',
-        url: '/userPosts',
+        url:
+          'https://app-factory-api.herokuapp.com/api/user/5f458293eb85b45f1875891d',
         data: query
       });
     } catch (err) {
@@ -25,3 +26,12 @@ export default {
     }
   }
 };
+
+// export default {
+//   getAllPosts: function () {
+//     return axios.get('/posts');
+//   },
+//   getUserPosts: function () {
+//     return axios.get('/posts/user/:id');
+//   }
+// };

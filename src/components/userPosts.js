@@ -11,6 +11,7 @@ export default function UserPosts() {
       try {
         const { data } = await axios.get(
           'https://app-factory-api.herokuapp.com/api/posts/user/5f458293eb85b45f1875891d'
+          // 'https://app-factory-djd.herokuapp.com/api/posts/user/5f458293eb85b45f1875891d'
         );
 
         setPosts(data);

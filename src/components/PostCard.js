@@ -5,13 +5,11 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { ThumbUpAltIcon } from '@material-ui/icons/ThumbUpAlt';
-import BuildIcon from '@material-ui/icons/Build';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import BrushIcon from '@material-ui/icons/Brush';
 import MicIcon from '@material-ui/icons/Mic';
-import MovieIcon from '@material-ui/icons/Movie';
-import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 import { UserContext } from '../context/UserContext';
 import Toast from './Toast';
 import API from '../utils/API';
@@ -88,11 +86,8 @@ export default function PostCard({
     case 'Business':
       categoryIcon = <BusinessCenterIcon />;
       break;
-    case 'Utility':
-      categoryIcon = <BuildIcon />;
-      break;
-    case 'Entertainment':
-      categoryIcon = <MovieIcon />;
+    case 'Marketing':
+      categoryIcon = <MonetizationOnIcon />;
       break;
     case 'Design':
       categoryIcon = <BrushIcon />;
@@ -100,10 +95,7 @@ export default function PostCard({
     case 'Journalism':
       categoryIcon = <MicIcon />;
       break;
-    case 'Lifestyle':
-      categoryIcon = <AccessibilityNewIcon />;
-      break;
-    case 'games':
+    case 'Gaming':
       categoryIcon = <SportsEsportsIcon />;
       break;
     default:

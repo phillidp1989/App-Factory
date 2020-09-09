@@ -9,14 +9,11 @@ export default function UserPosts() {
   useEffect(() => {
     const getAllPosts = async () => {
       try {
-        const results = await axios.get(
-          // 'https://app-factory-e6ff0.web.app/allposts'
-          // 'http://localhost:5000/api/posts'
-          // 'http://localhost:5000/api/posts/user/5f458293eb85b45f1875891d'
+        const { data } = await axios.get(
           'https://app-factory-api.herokuapp.com/api/posts/user/5f458293eb85b45f1875891d'
-          // 'https://app-factory-api.herokuapp.com/api/posts'
         );
-        setPosts(results);
+
+        setPosts(data);
       } catch (err) {
         console.error('ERROR - UserPosts() - getAllPosts', err);
       }
@@ -27,9 +24,8 @@ export default function UserPosts() {
   return (
     <React.Fragment>
       {posts.map((post) => (
-        <Grid item xs={10} spacing={2}>
+        <Grid item xs={10} spacing={2} key={post.title}>
           <PostCard
-            key={post.title}
             title={post.title}
             description={post.description}
             summary={post.summary}

@@ -2,6 +2,7 @@ import React from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TabPanel from './TabPanel';
+import UserPosts from '../UserPage';
 import { AppBar, Tabs, Tab } from '@material-ui/core';
 
 const a11yProps = (index) => ({
@@ -53,7 +54,7 @@ export default function Nav() {
           Here we can put a quick summary of user stats, maybe with some tables?
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          This can just be the simple listing of posts
+          <UserPosts />
         </TabPanel>
       </SwipeableViews>
     </div>

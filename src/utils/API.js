@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
   allPosts: async () => {
     try {
-      return await axios.get('/api/posts')
+      return await axios.get('/api/posts');
     } catch (err) {
       console.error('ERROR - API.js - allPosts', err);
     }
@@ -13,7 +13,7 @@ export default {
       return await axios.put('/api/posts/like', {
         postId,
         userId
-      })
+      });
     } catch (err) {
       console.error('ERROR - API.js - allPosts', err);
     }
@@ -23,9 +23,17 @@ export default {
       return await axios.put('/api/posts/unlike', {
         postId,
         userId
-      })
+      });
     } catch (err) {
       console.error('ERROR - API.js - unlikePost', err);
     }
+  },
+
+  getUserPosts: async (id) => {
+    try {
+      return await axios.get(`/api/posts/user/${id}`);
+    } catch (err) {
+      console.error('ERROR - UserPosts() - getUserPosts', err);
+    }
   }
-}
+};

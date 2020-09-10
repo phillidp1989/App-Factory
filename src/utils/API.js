@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
   currentUser: async () => {
     try {
-      return await axios.get('/api/user', { withCredentials: true })
+      return await axios.get('http://localhost:5000/api/user', { withCredentials: true })
     } catch (err) {
       console.error('ERROR - API.js - currentUser', err);
     }
@@ -54,6 +54,13 @@ export default {
       return await axios.post(`/api/posts`, postData);
     } catch (err) {
       console.error('ERROR - API.js - savePost', err);
+    }
+  },
+  github: async (username) => {
+    try {
+      return await axios.get(`https://api.github.com/users/${username}/repos?per_page=100`);
+    } catch (err) {
+      console.error('ERROR - API.js - github', err);
     }
   }
 };

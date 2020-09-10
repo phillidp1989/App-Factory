@@ -9,12 +9,12 @@ export default ({ children }) => {
 
   const getUser = async () => {
     try {
-      const result = await axios.get('https://app-factory-api.herokuapp.com/api/user', { withCredentials: true });
+      const result = await axios.get('/api/user', { withCredentials: true });
       console.log(result.data.user);
       setUser(result.data.user);
       setIsLoaded(true);
     } catch (err) {
-      console.error("ERROR - UserState.js - getUser", err);
+      console.error("ERROR - UserContext.js - getUser", err);
     }
   }
 

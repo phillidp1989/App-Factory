@@ -1,37 +1,31 @@
 import axios from 'axios';
 
 export default {
-  getAllPosts: async (query) => {
+  allPosts: async () => {
     try {
-      return await axios.request({
-        method: 'GET',
-        url: 'https://app-factory-api.herokuapp.com/api/posts',
-        data: query
-      });
+      return await axios.get('/api/posts');
     } catch (err) {
-      console.error('ERROR - API.js - getAllPosts', err);
+      console.error('ERROR - API.js - allPosts', err);
     }
   },
-
-  getUserPosts: async (query) => {
+  likePost: async (postId, userId) => {
     try {
-      return await axios.request({
-        method: 'GET',
-        url:
-          'https://app-factory-api.herokuapp.com/api/user/5f458293eb85b45f1875891d',
-        data: query
+      return await axios.put('/api/posts/like', {
+        postId,
+        userId
       });
     } catch (err) {
-      console.error('ERROR - API.js - getAllPosts', err);
+      console.error('ERROR - API.js - allPosts', err);
+    }
+  },
+  unlikePost: async (postId, userId) => {
+    try {
+      return await axios.put('/api/posts/unlike', {
+        postId,
+        userId
+      });
+    } catch (err) {
+      console.error('ERROR - API.js - unlikePost', err);
     }
   }
 };
-
-// export default {
-//   getAllPosts: function () {
-//     return axios.get('/posts');
-//   },
-//   getUserPosts: function () {
-//     return axios.get('/posts/user/:id');
-//   }
-// };

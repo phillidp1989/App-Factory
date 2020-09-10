@@ -2,6 +2,7 @@ import React from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TabPanel from './TabPanel';
+import UserPosts from '../UserPage';
 import { AppBar, Tabs, Tab } from '@material-ui/core';
 import Summary from './Summary';
 
@@ -54,7 +55,7 @@ export default function Nav() {
           <Summary />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          This can just be the simple listing of posts
+          <UserPosts />
         </TabPanel>
       </SwipeableViews>
     </div>

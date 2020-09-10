@@ -14,9 +14,9 @@ export default ({ children }) => {
       setUser(result.data.user);
       setIsLoaded(true);
     } catch (err) {
-      console.error("ERROR - UserContext.js - getUser", err);
+      console.error('ERROR - UserContext.js - getUser', err);
     }
-  }
+  };
 
   useEffect(() => {
     getUser();
@@ -28,5 +28,5 @@ export default ({ children }) => {
         {children}
       </UserContext.Provider>
     </div>
-  )
-}
+  );
+};

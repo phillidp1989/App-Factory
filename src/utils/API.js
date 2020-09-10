@@ -33,7 +33,7 @@ export default {
     try {
       return await axios.get(`/api/posts/user/${id}`);
     } catch (err) {
-      console.error('ERROR - UserPosts() - getUserPosts', err);
+      console.error('ERROR - API.js - getUserPosts', err);
     }
   }
 };

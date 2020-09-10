@@ -48,6 +48,13 @@ export default {
     } catch (err) {
       console.error('ERROR - UserPosts() - getUserPosts', err);
     }
+  },
+  savePost: async (postData) => {
+    try {
+      return await axios.post(`/api/posts`, postData);
+    } catch (err) {
+      console.error('ERROR - API.js - savePost', err);
+    }
   }
 };
 

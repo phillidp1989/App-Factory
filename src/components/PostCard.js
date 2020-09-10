@@ -173,14 +173,14 @@ export default function PostCard({
         {!isLoaded
           ? null
           : [
-              liked && isLoaded ? (
-                <IconButton aria-label="thumb down" onClick={unlikeHandler}>
-                  <ThumbUpAltIcon className={classes.liked} />
-                  <Typography variant="h6" className={classes.score}>
-                    {likes}
-                  </Typography>
-                </IconButton>
-              ) : (
+            liked && isLoaded ? (
+              <IconButton aria-label="thumb down" onClick={unlikeHandler}>
+                <ThumbUpAltIcon className={classes.liked} />
+                <Typography variant="h6" className={classes.score}>
+                  {likes}
+                </Typography>
+              </IconButton>
+            ) : (
                 <IconButton aria-label="thumb up" onClick={likeHandler}>
                   <ThumbUpAltIcon />
                   <Typography variant="h6" className={classes.score}>
@@ -188,7 +188,7 @@ export default function PostCard({
                   </Typography>
                 </IconButton>
               )
-            ]}
+          ]}
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -206,7 +206,7 @@ export default function PostCard({
           <Typography paragraph>{description}</Typography>
         </CardContent>
       </Collapse>
-      <Toast open={open} setOpen={setOpen} />
+      <Toast open={open} setOpen={setOpen} text={'Login to like a post!'} />
     </Card>
   );
 }

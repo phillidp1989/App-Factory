@@ -1,5 +1,5 @@
-import React, { useState, createContext, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, createContext, useEffect } from "react";
+import API from '../utils/API';
 
 export const UserContext = createContext();
 
@@ -9,9 +9,7 @@ export default ({ children }) => {
 
   const getUser = async () => {
     try {
-      const result = await axios.get('http://localhost:5000/api/user', {
-        withCredentials: true
-      });
+      const result = await API.currentUser();
       console.log(result.data.user);
       setUser(result.data.user);
       setIsLoaded(true);

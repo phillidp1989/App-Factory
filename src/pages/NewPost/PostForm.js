@@ -14,16 +14,6 @@ import {
   FormLabel
 } from '@material-ui/core';
 
-// const savePost = async () => {
-//   const post = {
-//     title,
-//     tech,
-//     description,
-//     details
-//   }
-//   const result = await API.savePost(post);
-// }
-
 export default function PostForm({
   postData,
   setPostData,

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PostCard from './PostCard';
-import axios from 'axios';
 import { Grid } from '@material-ui/core';
 import { UserContext } from '../context/UserContext';
 import API from '../utils/API';

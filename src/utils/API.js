@@ -27,5 +27,13 @@ export default {
     } catch (err) {
       console.error('ERROR - API.js - unlikePost', err);
     }
+  },
+
+  getAllPosts: async (id) => {
+    try {
+      return await axios.get(`/api/posts/user/${id}`);
+    } catch (err) {
+      console.error('ERROR - UserPosts() - getAllPosts', err);
+    }
   }
 };

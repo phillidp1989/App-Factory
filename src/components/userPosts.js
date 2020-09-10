@@ -3,6 +3,7 @@ import PostCard from './PostCard';
 import axios from 'axios';
 import { Grid } from '@material-ui/core';
 import { UserContext } from '../context/UserContext';
+import API from '../utils/API';
 
 export default function UserPosts() {
   const [posts, setPosts] = useState([]);
@@ -10,13 +11,10 @@ export default function UserPosts() {
 
   useEffect(() => {
     const getAllPosts = async () => {
+      console.log(user);
       try {
         if (user) {
-          const { data } = await axios.get(
-            `https://app-factory-api.herokuapp.com/api/posts/user/${user}`
-            // 'https://app-factory-djd.herokuapp.com/api/posts/user/5f458293eb85b45f1875891d'
-          );
-
+          const { data } = await API.getAllPosts(user._id);
           setPosts(data);
         }
       } catch (err) {
@@ -29,11 +27,16 @@ export default function UserPosts() {
   return (
     <React.Fragment>
       {posts.map((post) => (
-        <Grid item xs={10} spacing={2} key={post.title}>
+        <Grid item xs={10} key={post.title}>
           <PostCard
+            id={post._id}
             title={post.title}
-            description={post.description}
+            date={post.createdAt}
+            category={post.category}
             summary={post.summary}
+            description={post.description}
+            score={post.score}
+            likedBy={post.likedBy}
           />
         </Grid>
       ))}

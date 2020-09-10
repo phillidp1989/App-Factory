@@ -10,18 +10,18 @@ export default function UserPosts() {
   const { user, isLoaded } = useContext(UserContext);
 
   useEffect(() => {
-    const getAllPosts = async () => {
+    const getUserPosts = async () => {
       console.log(user);
       try {
         if (user) {
-          const { data } = await API.getAllPosts(user._id);
+          const { data } = await API.getUserPosts(user._id);
           setPosts(data);
         }
       } catch (err) {
-        console.error('ERROR - UserPosts() - getAllPosts', err);
+        console.error('ERROR - UserPosts() - getUserPosts', err);
       }
     };
-    getAllPosts();
+    getUserPosts();
   }, [isLoaded]);
 
   return (

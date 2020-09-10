@@ -29,11 +29,11 @@ export default {
     }
   },
 
-  getAllPosts: async (id) => {
+  getUserPosts: async (id) => {
     try {
       return await axios.get(`/api/posts/user/${id}`);
     } catch (err) {
-      console.error('ERROR - UserPosts() - getAllPosts', err);
+      console.error('ERROR - UserPosts() - getUserPosts', err);
     }
   }
 };

@@ -5,6 +5,7 @@ import AllPosts from './pages/AllPosts';
 import UserPosts from './pages/UserPage';
 import Dashboard from './pages/Dashboard';
 import NewPost from './pages/NewPost';
+import DevPost from './pages/DevPosts';
 import Login from './pages/Login';
 import PrivateRoute from './hocs/PrivateRoute';
 import { CssBaseline } from '@material-ui/core';
@@ -23,6 +24,7 @@ export default function App() {
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/posts/new" component={NewPost} />
         <Route path="/userposts" component={UserPosts} />
+        <Route path="/devposts" component={DevPost} />
       </Router>
     </div>
   );

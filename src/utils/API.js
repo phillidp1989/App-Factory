@@ -38,5 +38,13 @@ export default {
     } catch (err) {
       console.error('ERROR - API.js - getUserPosts', err);
     }
+  },
+
+  getPostSolutions: async () => {
+    try {
+      return await axios.get('http://localhost:5000/api/solutions/post/:id');
+    } catch (err) {
+      console.error('ERROR - API.js - getPostSolutions', err);
+    }
   }
 };

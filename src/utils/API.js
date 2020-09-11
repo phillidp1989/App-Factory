@@ -58,7 +58,8 @@ export default {
   getPostSolutions: async () => {
     try {
       return await axios.get(
-        'http://localhost:5000/api/solutions/post/5f4c1eebdc995345f4a59af2'
+        '/solutions/post/:id'
+        // 'http://localhost:5000/api/solutions/post/5f4c1eebdc995345f4a59af2'
       );
     } catch (err) {
       console.error('ERROR - API.js - getPostSolutions', err);
@@ -96,7 +97,7 @@ export default {
   },
   likeDevPost: async (solutionId, userId) => {
     try {
-      return await axios.put('http://localhost:5000/api/solutions/like', {
+      return await axios.put('/solutions/like', {
         solutionId,
         userId
       });
@@ -106,7 +107,7 @@ export default {
   },
   unlikeDevPost: async (solutionId, userId) => {
     try {
-      return await axios.put('http://localhost:5000/api/solutions/unlike', {
+      return await axios.put('/solutions/unlike', {
         solutionId,
         userId
       });
@@ -117,7 +118,8 @@ export default {
   getUserSolutions: async () => {
     try {
       return await axios.get(
-        'http://localhost:5000/api/solutions/developer/5f458293eb85b45f1875891d'
+        '/solutions/developer/:id'
+        // 'http://localhost:5000/api/solutions/developer/5f458293eb85b45f1875891d'
       );
     } catch (err) {
       console.error('ERROR - API.js - getUserSolutions', err);

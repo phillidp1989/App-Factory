@@ -1,7 +1,8 @@
 import React from 'react';
-import DevPost from '../../components/devPost';
+// import DevPost from '../../components/devPost';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import DevPostResults from '../../components/devPostResults';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +26,7 @@ export default function DevPosts() {
       spacing={2}
       className={classes.root}
     >
-      <DevPost />
+      <DevPostResults />
     </Grid>
   );
 }

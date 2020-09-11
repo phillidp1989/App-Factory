@@ -158,9 +158,12 @@ export default function DevPost({
   title,
   category,
   summary,
-  description,
+  repoName,
+  repoDescription,
+  deployed_link,
+  repo_link,
   score,
-  likedBy,
+  // likedBy,
   date
 }) {
   // Material UI card
@@ -178,25 +181,27 @@ export default function DevPost({
   // Icon selection based on category
   let categoryIcon;
 
-  // switch (category[0]) {
-  //   case 'Business':
-  //     categoryIcon = <BusinessCenterIcon />;
-  //     break;
-  //   case 'Marketing':
-  //     categoryIcon = <MonetizationOnIcon />;
-  //     break;
-  //   case 'Design':
-  //     categoryIcon = <BrushIcon />;
-  //     break;
-  //   case 'Journalism':
-  //     categoryIcon = <MicIcon />;
-  //     break;
-  //   case 'Gaming':
-  //     categoryIcon = <SportsEsportsIcon />;
-  //     break;
-  //   default:
-  //     break;
-  // }
+  if (category) {
+    switch (category[0]) {
+      case 'Business':
+        categoryIcon = <BusinessCenterIcon />;
+        break;
+      case 'Marketing':
+        categoryIcon = <MonetizationOnIcon />;
+        break;
+      case 'Design':
+        categoryIcon = <BrushIcon />;
+        break;
+      case 'Journalism':
+        categoryIcon = <MicIcon />;
+        break;
+      case 'Gaming':
+        categoryIcon = <SportsEsportsIcon />;
+        break;
+      default:
+        break;
+    }
+  }
 
   const handleToast = () => {
     setOpen(true);
@@ -242,102 +247,89 @@ export default function DevPost({
   };
 
   //------------------------------------
-  // const classes = useStyles();
-  // const bull = <span className={classes.bullet}>•</span>;
-  // const [posts, setPosts] = useState([]);
-  const [solutions, setSolutions] = useState([]);
-
-  useEffect(() => {
-    // if (user) {
-    //   if (likedBy.includes(user._id) && isLoaded) {
-    //     setLiked(true);
-    //   } else {
-    //     setLiked(false);
-    //   }
-    // }
-    const getPostSolutions = async () => {
-      try {
-        // const { data } = await API.allPosts();
-        // setPosts(data);
-        const { data } = await API.getPostSolutions();
-        setSolutions(data.solutions);
-        console.log(data);
-      } catch (err) {
-        console.error('ERROR - UserPosts() - getPostSolutions', err);
-      }
-    };
-    getPostSolutions();
-  }, []);
 
   return (
-    <React.Fragment>
-      {solutions.map((solution) => (
-        <Card className={classes.root}>
-          <CardHeader
-            // avatar={
-            //   <Avatar aria-label="post" className={classes.avatar}>
-            //     {categoryIcon}
-            //   </Avatar>
-            // }
-            // action={
-            //   <IconButton aria-label="settings">
-            //     <MoreVertIcon />
-            //   </IconButton>
-            // }
-            key={solution.title}
-            // title={<Link to={`/posts/${id}`}>{solution.title}</Link>}
-            title={solution.title}
-            // subheader={createdAt}
-          />
+    <Card className={classes.root}>
+      <CardHeader
+        // avatar={
+        //   <Avatar aria-label="post" className={classes.avatar}>
+        //     {categoryIcon}
+        //   </Avatar>
+        // }
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
+        key={title}
+        // title={<Link to={`/posts/${id}`}>{solution.title}</Link>}
+        title={title}
+        // subheader={createdAt}
+      />
 
-          <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {solution.repoDescription}
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            {!isLoaded
-              ? null
-              : [
-                  liked && isLoaded ? (
-                    <IconButton aria-label="thumb down" onClick={unlikeHandler}>
-                      <ThumbUpAltIcon className={classes.liked} />
-                      <Typography variant="h6" className={classes.score}>
-                        {likes}
-                      </Typography>
-                    </IconButton>
-                  ) : (
-                    <IconButton aria-label="thumb up" onClick={likeHandler}>
-                      <ThumbUpAltIcon />
-                      <Typography variant="h6" className={classes.score}>
-                        {likes}
-                      </Typography>
-                    </IconButton>
-                  )
-                ]}
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Typography paragraph>Summary:</Typography>
-              <Typography paragraph>{solution.repoDescription}</Typography>
-              <DevPosts />
-              <DevPosts />
-              <DevPosts />
-            </CardContent>
-          </Collapse>
-          <Toast open={open} setOpen={setOpen} text={'Login to like a post!'} />
-        </Card>
-      ))}
-    </React.Fragment>
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {summary}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        {!isLoaded
+          ? null
+          : [
+              liked && isLoaded ? (
+                <IconButton aria-label="thumb down" onClick={unlikeHandler}>
+                  <ThumbUpAltIcon className={classes.liked} />
+                  <Typography variant="h6" className={classes.score}>
+                    {likes}
+                  </Typography>
+                </IconButton>
+              ) : (
+                <IconButton aria-label="thumb up" onClick={likeHandler}>
+                  <ThumbUpAltIcon />
+                  <Typography variant="h6" className={classes.score}>
+                    {likes}
+                  </Typography>
+                </IconButton>
+              )
+            ]}
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography paragraph>Resources:</Typography>
+          {/* <Typography paragraph>{solution.repoDescription}</Typography> */}
+
+          <Typography paragraph>
+            Deployed Link:
+            {deployed_link ? (
+              <a href={deployed_link} target="_blank" rel="noopener noreferrer">
+                {deployed_link}
+              </a>
+            ) : (
+              'There is no current Deployed App'
+            )}
+          </Typography>
+
+          <Typography paragraph>
+            Repo Link:
+            <a href={deployed_link} target="_blank" rel="noopener noreferrer">
+              {repo_link}
+            </a>
+          </Typography>
+        </CardContent>
+      </Collapse>
+      <Toast open={open} setOpen={setOpen} text={'Login to like a post!'} />
+    </Card>
+    // ))}
+    // </React.Fragment>
   );
 }

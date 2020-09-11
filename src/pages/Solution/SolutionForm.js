@@ -9,6 +9,8 @@ import {
   Grow,
   Grid
 } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { green } from '@material-ui/core/colors';
 import GitHubIcon from '@material-ui/icons/GitHub';
@@ -20,7 +22,6 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import CommentIcon from '@material-ui/icons/Comment';
 import Avatar from '@material-ui/core/Avatar';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -33,6 +34,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { UserContext } from '../../context/UserContext';
 import API from '../../utils/API';
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import { useParams } from 'react-router-dom';
+import SuccessDialog from '../../components/SuccessDialog';
 
 const useStyles = makeStyles((theme) => ({
   containerRoot: {
@@ -85,20 +88,30 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10
   },
   listItem: {
-    marginTop: 5
+    marginTop: 5,
+    border: '1px solid black',
+    borderRadius: 5
+  },
+  bottom: {
+    marginBottom: 30
   }
 }));
 
 export default function SolutionForm() {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const classes = useStyles();
   const { user } = useContext(UserContext);
+  const { id } = useParams();
 
   // State
-  const [secondary, setSecondary] = useState(false);
   const [open, setOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const loading = open && options.length === 0;
   const [comment, setComment] = useState('');
+  const [deployedApp, setDeployedApp] = useState('');
+  const [deployedBool, setDeployedBool] = useState(false);
   const [solutionData, setSolutionData] = useState({
     comments: [],
     repoName: '',
@@ -109,6 +122,25 @@ export default function SolutionForm() {
     developerId: ''
   });
 
+  // useEffect for post data API call
+  useEffect(() => {
+    const getPosterId = async () => {
+      try {
+        const { data } = await API.getPost(id);
+        setSolutionData({
+          ...solutionData,
+          postId: id,
+          posterId: data.posterId,
+          developerId: user._id
+        });
+      } catch (err) {
+        console.error('ERROR - SolutionForm.js - getPosterId', err);
+      }
+    };
+    getPosterId();
+  }, [])
+
+  // useEffect for Github API call
   useEffect(() => {
     let active = true;
 
@@ -117,9 +149,7 @@ export default function SolutionForm() {
     }
 
     (async () => {
-      // const results = await API.github(user.username);
-      const { data } = await API.github('phillidp1989');
-
+      const { data } = await API.github(user.username);
       if (active) {
         setOptions(data);
       }
@@ -129,6 +159,8 @@ export default function SolutionForm() {
       active = false;
     };
   }, [loading]);
+
+  console.log(solutionData);
 
   // Repo search handler
   const onTagsChange = (e, value) => {
@@ -154,6 +186,11 @@ export default function SolutionForm() {
     setComment(e.target.value);
   };
 
+  // Handle comments text area
+  const deployedLinkChange = (e) => {
+    setDeployedApp(e.target.value);
+  };
+
   // Add comments handler
   const commentSubmit = (e, value) => {
     e.preventDefault();
@@ -161,19 +198,44 @@ export default function SolutionForm() {
       ...solutionData,
       comments: [...solutionData.comments, comment]
     });
-    setComment("")
+    setComment('');
+  };
+
+  // Add comments handler
+  const deployedSubmit = (e, value) => {
+    e.preventDefault();
+    setSolutionData({
+      ...solutionData,
+      deployedLink: deployedApp
+    });
+    setDeployedApp('');
+    setDeployedBool(true);
   };
 
   // Handle comment deletion
   const deleteComment = (e) => {
-    const key = e.currentTarget.parentNode.getAttribute("data-key");
+    const key = e.currentTarget.parentNode.getAttribute('data-key');
     setSolutionData({
       ...solutionData,
-      comments: solutionData.comments.filter((comment, index) => index !== parseInt(key))
+      comments: solutionData.comments.filter(
+        (comment, index) => index !== parseInt(key)
+      )
     });
-  }
+  };
 
-  console.log(solutionData);
+  // Handles deployed link edit button
+  const editLink = () => {
+    setDeployedBool(false);
+    setDeployedApp(solutionData.deployedLink);
+  };
+
+  // Handles solution submit FAB
+  const submitSolution = async (e) => {
+    e.preventDefault();
+    const result = await API.saveSolution(solutionData);
+    setDialogOpen(true);
+  };
+
 
   return (
     <React.Fragment>
@@ -183,7 +245,7 @@ export default function SolutionForm() {
             container
             justify="center"
             alignItems="center"
-            spacing={10}
+            spacing={isSmall ? 3 : 10}
             className={classes.containerRoot}
           >
             <Grid item xs={12}>
@@ -199,7 +261,7 @@ export default function SolutionForm() {
             </Grid>
             <Grid item xs={12} sm={8}>
               <Autocomplete
-                id="asynchronous-demo"
+                id="asynchronous-autcomplete"
                 style={{ width: '90%' }}
                 open={open}
                 onOpen={() => {
@@ -218,7 +280,7 @@ export default function SolutionForm() {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Search for a Github Repo"
+                    label="Search for a repo"
                     variant="outlined"
                     InputProps={{
                       ...params.InputProps,
@@ -241,7 +303,15 @@ export default function SolutionForm() {
                   className={classes.link}
                   icon={<LinkIcon fontSize="inherit" />}
                 >
-                  Link to repo: {solutionData.repoLink}
+                  Link to repo:{' '}
+                  <a
+                    href={solutionData.repoLink}
+                    alt={solutionData.repoName}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {solutionData.repoLink}
+                  </a>
                 </Alert>
               )}
               {!solutionData.repoDescription ? null : (
@@ -268,7 +338,7 @@ export default function SolutionForm() {
               <form className={classes.textField} noValidate autoComplete="off">
                 <TextField
                   id="standard-basic"
-                  label="Comment"
+                  label="Add comment"
                   style={{ width: '90%' }}
                   onChange={commentChange}
                   value={comment}
@@ -291,11 +361,13 @@ export default function SolutionForm() {
                           <CommentIcon />
                         </Avatar>
                       </ListItemAvatar>
-                      <ListItemText
-                        primary={comment}
-                      />
+                      <ListItemText primary={comment} />
                       <ListItemSecondaryAction data-key={index}>
-                        <IconButton edge="end" aria-label="delete" onClick={deleteComment}>
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={deleteComment}
+                        >
                           <DeleteIcon />
                         </IconButton>
                       </ListItemSecondaryAction>
@@ -304,12 +376,70 @@ export default function SolutionForm() {
                 </List>
               </div>
             </Grid>
+            <Grid item xs={12}>
+              <Divider variant="middle" />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Alert severity="info" icon={<LinkIcon fontSize="inherit" />}>
+                <AlertTitle>Deployed Application</AlertTitle>Add a link to the
+                deployed application
+              </Alert>
+            </Grid>
+            <Grid item xs={12} sm={8} className={classes.bottom}>
+              {deployedBool ? null : (
+                <form
+                  className={classes.textField}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <TextField
+                    id="standard-basic"
+                    label="Link to deployed app"
+                    style={{ width: '90%' }}
+                    onChange={deployedLinkChange}
+                    value={deployedApp}
+                  />
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className={classes.commentButton}
+                    onClick={deployedSubmit}
+                  >
+                    Add
+                  </Button>
+                </form>
+              )}
+              <div className={classes.demo}>
+                <List>
+                  {solutionData.deployedLink && deployedBool ? (
+                    <ListItem className={classes.listItem}>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <CommentIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText primary={solutionData.deployedLink} />
+                      <ListItemSecondaryAction>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          className={classes.commentButton}
+                          onClick={editLink}
+                        >
+                          Edit
+                        </Button>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ) : null}
+                </List>
+              </div>
+            </Grid>
           </Grid>
         </Container>
       </Grow>
       <Zoom in={true}>
         <Fab
-          // onClick={postForm}
+          onClick={submitSolution}
           className={classes.fab}
           color="secondary"
           aria-label="New Post"
@@ -317,6 +447,13 @@ export default function SolutionForm() {
           <PostAddIcon />
         </Fab>
       </Zoom>
+      <SuccessDialog
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        postId={id}
+        returnTo='Return to post'
+        successText='You have successfully added your solution to the App Factory'
+      />
     </React.Fragment>
   );
 }

@@ -94,20 +94,20 @@ export default {
       console.error('ERROR - API.js - getPost', err);
     }
   },
-  likeDevPost: async (postId, userId) => {
+  likeDevPost: async (solutionId, userId) => {
     try {
       return await axios.put('http://localhost:5000/api/solutions/like', {
-        postId,
+        solutionId,
         userId
       });
     } catch (err) {
       console.error('ERROR - API.js - likeDevPost', err);
     }
   },
-  unlikeDevPost: async (postId, userId) => {
+  unlikeDevPost: async (solutionId, userId) => {
     try {
       return await axios.put('http://localhost:5000/api/solutions/unlike', {
-        postId,
+        solutionId,
         userId
       });
     } catch (err) {

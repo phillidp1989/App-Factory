@@ -230,7 +230,9 @@ export default function DevPost({
         setLikes(likes + 1);
         setLiked(true);
         const result = await API.likeDevPost(id, user._id);
+
         console.log(user._id);
+        console.log(id);
       } catch (err) {
         console.error('ERROR - PostCard.js - likeHandler', err);
       }

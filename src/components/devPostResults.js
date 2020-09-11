@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DevPost from './devPost';
 import { Grid } from '@material-ui/core';
-import BasicPagination from './Pagniation';
 import API from '../utils/API';
 
 export default function DevPostResults() {
@@ -16,7 +15,7 @@ export default function DevPostResults() {
         // setPosts(data);
         const { data } = await API.getPostSolutions();
         setSolutions(data.solutions);
-        console.log(data);
+        console.log(data.solutions);
       } catch (err) {
         console.error('ERROR - UserPosts() - getPostSolutions', err);
       }

@@ -22,7 +22,7 @@ export default function App() {
         <Route exact path="/" component={AllPosts} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/posts/new" component={NewPost} />
-        <Route path="/solution" component={SolutionForm} />
+        <Route path="/posts/solution/:id" component={SolutionForm} />
       </Router>
     </div>
   );

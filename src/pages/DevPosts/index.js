@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Index() {
+export default function DevPosts() {
   const classes = useStyles();
 
   return (

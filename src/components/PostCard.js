@@ -13,6 +13,7 @@ import MicIcon from '@material-ui/icons/Mic';
 import { UserContext } from '../context/UserContext';
 import Toast from './Toast';
 import API from '../utils/API';
+import DevPosts from './devPost';
 import {
   Card,
   CardHeader,
@@ -204,6 +205,9 @@ export default function PostCard({
         <CardContent>
           <Typography paragraph>Summary:</Typography>
           <Typography paragraph>{description}</Typography>
+          <DevPosts />
+          <DevPosts />
+          <DevPosts />
         </CardContent>
       </Collapse>
       <Toast open={open} setOpen={setOpen} />

@@ -8,7 +8,8 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
-    width: '90%'
+    width: '100%',
+    marginBottom: 20
   },
   bullet: {
     display: 'inline-block',
@@ -41,10 +42,18 @@ export default function DevPost() {
           A few demo words on how the app has been built.
           <br />
         </Typography>
+        <Typography variant="body2" component="p">
+          Link to deployed application
+          <br />
+        </Typography>
+        <Typography variant="body2" component="p">
+          ALink to GitHub repo
+          <br />
+        </Typography>
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         <Button size="small">Learn More</Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 // import DevPost from '../../components/devPost';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import DevPostResults from '../../components/devPostResults';
+import DevPostResults from '../../components/PostSolutionsResults';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function DevPosts() {
+export default function DevPostsSolutions() {
   const classes = useStyles();
 
   return (

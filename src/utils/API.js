@@ -117,7 +117,7 @@ export default {
   getUserSolutions: async () => {
     try {
       return await axios.get(
-        'http://localhost:5000/api/solutions/poster/5f458293eb85b45f1875891d'
+        'http://localhost:5000/api/solutions/developer/5f458293eb85b45f1875891d'
       );
     } catch (err) {
       console.error('ERROR - API.js - getUserSolutions', err);

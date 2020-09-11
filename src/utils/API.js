@@ -3,7 +3,9 @@ import axios from 'axios';
 export default {
   currentUser: async () => {
     try {
-      return await axios.get('/api/user', { withCredentials: true })
+      return await axios.get('http://localhost:5000/api/user', {
+        withCredentials: true
+      });
     } catch (err) {
       console.error('ERROR - API.js - currentUser', err);
     }
@@ -35,9 +37,9 @@ export default {
       console.error('ERROR - API.js - unlikePost', err);
     }
   },
-  dashboardInfo: async id => {
+  dashboardInfo: async (id) => {
     try {
-      return await axios.get(`/api/posts/dashboard/${id}`)
+      return await axios.get(`/api/posts/dashboard/${id}`);
     } catch (err) {
       console.error('ERROR - API.js - dashboardInfo', err);
     }
@@ -71,7 +73,9 @@ export default {
   },
   github: async (username) => {
     try {
-      return await axios.get(`https://api.github.com/users/${username}/repos?per_page=100`);
+      return await axios.get(
+        `https://api.github.com/users/${username}/repos?per_page=100`
+      );
     } catch (err) {
       console.error('ERROR - API.js - github', err);
     }
@@ -89,7 +93,5 @@ export default {
     } catch (err) {
       console.error('ERROR - API.js - getPost', err);
     }
-  },
+  }
 };
-
-

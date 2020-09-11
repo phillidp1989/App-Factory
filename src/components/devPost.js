@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+// import CardActions from '@material-ui/core/CardActions';
+// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import API from '../utils/API';
 import { Grid } from '@material-ui/core';
@@ -35,12 +35,11 @@ export default function DevPost() {
   useEffect(() => {
     const getPostSolutions = async () => {
       try {
-        // const { postData } = await API.allPosts();
-        // setPosts(postData);
-        const { solutionsData } = await API.getPostSolutions(posts._id);
-        setSolutions(solutionsData);
-        console.log(posts._id);
-        console.log(solutionsData);
+        // const { data } = await API.allPosts();
+        // setPosts(data);
+        const { data } = await API.getPostSolutions();
+        setSolutions(data.solutions);
+        console.log(data);
       } catch (err) {
         console.error('ERROR - UserPosts() - getPostSolutions', err);
       }
@@ -59,20 +58,20 @@ export default function DevPost() {
                 color="textSecondary"
                 gutterBottom
               >
-                {solution.title}
+                {solution.repoName}
               </Typography>
               <Typography variant="body2" component="p">
-                A few demo words on how the app has been built.
+                {/* A few demo words on how the app has been built. */}
                 {solution.repoDescription}
                 <br />
               </Typography>
               <Typography variant="body2" component="p">
-                Link to deployed application
-                {solution.title}
+                {/* Link to deployed application */}
+                {solution.deployedLink}
                 <br />
               </Typography>
               <Typography variant="body2" component="p">
-                ALink to GitHub repo
+                {/* ALink to GitHub repo */}
                 {solution.repoLink}
                 <br />
               </Typography>

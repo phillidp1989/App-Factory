@@ -5,9 +5,10 @@ import AllPosts from './pages/AllPosts';
 import Dashboard from './pages/Dashboard';
 import NewPost from './pages/NewPost';
 import DevPost from './pages/DevPosts';
+import UserPosts from './pages/UserPage';
 import Login from './pages/Login';
 import PrivateRoute from './hocs/PrivateRoute';
-import DeveloperRoute from './hocs/DeveloperRoute;';
+// import DeveloperRoute from './hocs/DeveloperRoute;';
 import { CssBaseline } from '@material-ui/core';
 import GuestRoute from './hocs/GuestRoute';
 import SolutionForm from './pages/Solution/SolutionForm';
@@ -26,7 +27,7 @@ export default function App() {
         <Route path="/devposts" component={DevPost} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/posts/new" component={NewPost} />
-        <DeveloperRoute path="/posts/solution/:id" component={SolutionForm} />
+        {/* <DeveloperRoute path="/posts/solution/:id" component={SolutionForm} /> */}
       </Router>
     </div>
   );

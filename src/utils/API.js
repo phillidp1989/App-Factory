@@ -93,5 +93,25 @@ export default {
     } catch (err) {
       console.error('ERROR - API.js - getPost', err);
     }
+  },
+  likeDevPost: async (postId, userId) => {
+    try {
+      return await axios.put('http://localhost:5000/api/solutions/like', {
+        postId,
+        userId
+      });
+    } catch (err) {
+      console.error('ERROR - API.js - likeDevPost', err);
+    }
+  },
+  unlikeDevPost: async (postId, userId) => {
+    try {
+      return await axios.put('http://localhost:5000/api/solutions/unlike', {
+        postId,
+        userId
+      });
+    } catch (err) {
+      console.error('ERROR - API.js - unlikeDevPost', err);
+    }
   }
 };

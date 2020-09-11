@@ -44,7 +44,8 @@ export default function DevPostResults() {
             summary={solution.repoDescription}
             score={solution.score}
             deployed_link={solution.deployedLink}
-            repo_link={solutions.repoLink}
+            repo_link={solution.repoLink}
+            likedBy={solution.likedBy}
           />
         </Grid>
       ))}

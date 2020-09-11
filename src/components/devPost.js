@@ -163,7 +163,7 @@ export default function DevPost({
   deployed_link,
   repo_link,
   score,
-  // likedBy,
+  likedBy,
   date
 }) {
   // Material UI card
@@ -207,15 +207,15 @@ export default function DevPost({
     setOpen(true);
   };
 
-  // useEffect(() => {
-  //   if (user) {
-  //     if (likedBy.includes(user._id) && isLoaded) {
-  //       setLiked(true);
-  //     } else {
-  //       setLiked(false);
-  //     }
-  //   }
-  // }, [isLoaded]);
+  useEffect(() => {
+    if (user) {
+      if (likedBy.includes(user._id) && isLoaded) {
+        setLiked(true);
+      } else {
+        setLiked(false);
+      }
+    }
+  }, [isLoaded]);
 
   const handleExpandClick = (event) => {
     event.stopPropagation();
@@ -229,7 +229,8 @@ export default function DevPost({
       try {
         setLikes(likes + 1);
         setLiked(true);
-        const result = await API.likePost(id, user._id);
+        const result = await API.likeDevPost(id, user._id);
+        console.log(user._id);
       } catch (err) {
         console.error('ERROR - PostCard.js - likeHandler', err);
       }
@@ -240,7 +241,8 @@ export default function DevPost({
     try {
       setLikes(likes - 1);
       setLiked(false);
-      const result = await API.unlikePost(id, user._id);
+      const result = await API.unlikeDevPost(id, user._id);
+      console.log(user._id);
     } catch (err) {
       console.error('ERROR - PostCard.js - unlikeHandler', err);
     }
@@ -251,16 +253,16 @@ export default function DevPost({
   return (
     <Card className={classes.root}>
       <CardHeader
-        // avatar={
-        //   <Avatar aria-label="post" className={classes.avatar}>
-        //     {categoryIcon}
-        //   </Avatar>
-        // }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
+        avatar={
+          <Avatar aria-label="post" className={classes.avatar}>
+            {categoryIcon}
+          </Avatar>
+        }
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
         key={title}
         // title={<Link to={`/posts/${id}`}>{solution.title}</Link>}
         title={title}

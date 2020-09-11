@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AllPosts from './pages/AllPosts';
 import Dashboard from './pages/Dashboard';
 import NewPost from './pages/NewPost';
-import DevPost from './pages/DevPosts';
+import DevPostsSolutions from './pages/PostSolutions';
 import UserPosts from './pages/UserPage';
 import Login from './pages/Login';
 import PrivateRoute from './hocs/PrivateRoute';
@@ -24,7 +24,7 @@ export default function App() {
         </Switch>
         <Route exact path="/" component={AllPosts} />
         <Route path="/userposts" component={UserPosts} />
-        <Route path="/devposts" component={DevPost} />
+        <Route path="/postsolutions" component={DevPostsSolutions} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/posts/new" component={NewPost} />
         <DeveloperRoute path="/posts/solution/:id" component={SolutionForm} />

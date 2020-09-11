@@ -13,7 +13,6 @@ import MicIcon from '@material-ui/icons/Mic';
 import { UserContext } from '../context/UserContext';
 import Toast from './Toast';
 import API from '../utils/API';
-import DevPosts from './devPost';
 import {
   Card,
   CardHeader,

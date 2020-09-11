@@ -39,6 +39,8 @@ export default function DevPost() {
         // setPosts(postData);
         const { solutionsData } = await API.getPostSolutions(posts._id);
         setSolutions(solutionsData);
+        console.log(posts._id);
+        console.log(solutionsData);
       } catch (err) {
         console.error('ERROR - UserPosts() - getPostSolutions', err);
       }
@@ -61,14 +63,17 @@ export default function DevPost() {
               </Typography>
               <Typography variant="body2" component="p">
                 A few demo words on how the app has been built.
+                {solution.repoDescription}
                 <br />
               </Typography>
               <Typography variant="body2" component="p">
                 Link to deployed application
+                {solution.title}
                 <br />
               </Typography>
               <Typography variant="body2" component="p">
                 ALink to GitHub repo
+                {solution.repoLink}
                 <br />
               </Typography>
             </CardContent>

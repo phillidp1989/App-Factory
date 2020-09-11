@@ -205,6 +205,7 @@ export default function Index() {
       <SuccessDialog
         dialogOpen={dialogOpen}
         setDialogOpen={setDialogOpen}
+        returnLink={'/'}
         returnTo='Return to homepage'
         successText='You have successfully added your idea to the App Factory'
       />

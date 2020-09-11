@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
   currentUser: async () => {
     try {
-      return await axios.get('http://localhost:5000/api/user', { withCredentials: true })
+      return await axios.get('/api/user', { withCredentials: true })
     } catch (err) {
       console.error('ERROR - API.js - currentUser', err);
     }
@@ -62,7 +62,21 @@ export default {
     } catch (err) {
       console.error('ERROR - API.js - github', err);
     }
-  }
+  },
+  saveSolution: async (solutionData) => {
+    try {
+      return await axios.post('/api/solutions', solutionData);
+    } catch (err) {
+      console.error('ERROR - API.js - saveSolution', err);
+    }
+  },
+  getPost: async (id) => {
+    try {
+      return await axios.get(`/api/posts/${id}`);
+    } catch (err) {
+      console.error('ERROR - API.js - getPost', err);
+    }
+  },
 };
 
 

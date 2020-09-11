@@ -84,6 +84,9 @@ export default function PostForm({
         </Typography>
         <CKEditor
           editor={ClassicEditor}
+          onInit={(editor) => {
+            editor.setData(postData.description);
+          }}
           onChange={(event, editor) => {
             const description = editor.getData();
             setPostData({ ...postData, description });
@@ -100,7 +103,8 @@ export default function PostForm({
           multiple
           id="tags-standard"
           options={technologies}
-          getOptionLabel={(option) => option.title}
+          getOptionLabel={(option) => option}
+          value={postData.technologies}
           renderInput={(params) => (
             <TextField
               {...params}

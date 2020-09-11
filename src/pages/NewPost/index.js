@@ -42,7 +42,7 @@ export default function Index() {
     title: '',
     summary: '',
     description: '',
-    categories: [
+    category: [
       {
         name: 'Business',
         checked: false
@@ -87,13 +87,13 @@ export default function Index() {
 
   const handleCategory = (e) => {
     const { name, checked } = e.target;
-    const { categories } = postData;
+    const { category: categories } = postData;
     const i = categories.findIndex((obj) => obj.name === name);
     const updatedCategories = [...categories];
     updatedCategories[i] = { name, checked };
     setPostData({
       ...postData,
-      categories: updatedCategories
+      category: updatedCategories
     });
 
     //Checking for errors
@@ -138,7 +138,7 @@ export default function Index() {
     }
 
     // Filtering categories to array of strings
-    const categories = postData.categories
+    const categories = postData.category
       .filter(({ checked }) => checked)
       .map(({ name }) => name);
 

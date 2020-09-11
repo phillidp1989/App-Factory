@@ -61,7 +61,7 @@ export default function PostForm({
         >
           <FormLabel component="legend">Pick up to two</FormLabel>
           <FormGroup row>
-            {postData.categories.map(({ name, checked }) => (
+            {postData.category.map(({ name, checked }) => (
               <FormControlLabel
                 key={name}
                 label={name}

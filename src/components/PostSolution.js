@@ -106,7 +106,6 @@ import MicIcon from '@material-ui/icons/Mic';
 import { UserContext } from '../context/UserContext';
 import Toast from './Toast';
 import API from '../utils/API';
-import DevPosts from './devPost';
 import {
   Card,
   CardHeader,
@@ -153,7 +152,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function DevPost({
+export default function PostSolution({
   id,
   title,
   category,

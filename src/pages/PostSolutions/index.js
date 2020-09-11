@@ -1,5 +1,4 @@
 import React from 'react';
-// import DevPost from '../../components/devPost';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import DevPostResults from '../../components/PostSolutionsResults';

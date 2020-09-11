@@ -5,14 +5,10 @@ import API from '../utils/API';
 
 export default function PostSolutionsResults() {
   const [solutions, setSolutions] = useState([]);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [postsPerPage] = useState(5)
 
   useEffect(() => {
     const getPostSolutions = async () => {
       try {
-        // const { data } = await API.allPosts();
-        // setPosts(data);
         const { data } = await API.getPostSolutions();
         setSolutions(data.solutions);
         console.log(data.solutions);
@@ -22,16 +18,6 @@ export default function PostSolutionsResults() {
     };
     getPostSolutions();
   }, []);
-
-  // // Pagination logic
-  // const indexOfLastPost = currentPage * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
-  // // Page change handler
-  // const handleChange = (event, value) => {
-  //   setCurrentPage(value);
-  // };
 
   return (
     <React.Fragment>
@@ -48,9 +34,6 @@ export default function PostSolutionsResults() {
           />
         </Grid>
       ))}
-      {/* <Grid item xs={10} >
-        <BasicPagination postsPerPage={postsPerPage} totalPosts={posts.length} handleChange={handleChange} />
-      </Grid> */}
     </React.Fragment>
   );
 }

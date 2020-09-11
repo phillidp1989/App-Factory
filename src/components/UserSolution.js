@@ -172,9 +172,7 @@ export default function PostSolution({
           </IconButton>
         }
         key={title}
-        // title={<Link to={`/posts/${id}`}>{solution.title}</Link>}
         title={title}
-        // subheader={createdAt}
       />
 
       <CardContent>
@@ -216,7 +214,6 @@ export default function PostSolution({
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Resources:</Typography>
-          {/* <Typography paragraph>{solution.repoDescription}</Typography> */}
 
           <Typography paragraph>
             Deployed Link:
@@ -239,7 +236,5 @@ export default function PostSolution({
       </Collapse>
       <Toast open={open} setOpen={setOpen} text={'Login to like a post!'} />
     </Card>
-    // ))}
-    // </React.Fragment>
   );
 }

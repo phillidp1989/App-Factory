@@ -172,10 +172,7 @@ export default function SearchAppBar() {
                 >
                   My dashboard
                 </MenuItem>
-                <a
-                  href="/auth/logout"
-                  className={classes.link}
-                >
+                <a href="/auth/logout" className={classes.link}>
                   <MenuItem
                     onClick={() => {
                       handleClose();
@@ -187,15 +184,15 @@ export default function SearchAppBar() {
               </Menu>
             </div>
           ) : (
-              <Button
-                component={Link}
-                to="/login"
-                aria-label="Login"
-                color="inherit"
-              >
-                Login
-              </Button>
-            )}
+            <Button
+              component={Link}
+              to="/login"
+              aria-label="Login"
+              color="inherit"
+            >
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>

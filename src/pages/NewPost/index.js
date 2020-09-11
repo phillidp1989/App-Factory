@@ -153,7 +153,7 @@ export default function Index() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Grow in={true} style={{ transitionDelay: '300ms' }}>
         <Container component={Paper} className={classes.root}>
           <Typography variant="h4">Enter Your New App Idea:</Typography>
@@ -184,6 +184,6 @@ export default function Index() {
           <PostAddIcon />
         </Fab>
       </Zoom>
-    </React.Fragment>
+    </>
   );
 }

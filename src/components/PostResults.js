@@ -10,7 +10,7 @@ export default function PostResults() {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       {posts.map((post) => (
         <Grid key={post.title} item xs={10}>
           <PostCard
@@ -20,6 +20,6 @@ export default function PostResults() {
           />
         </Grid>
       ))}
-    </React.Fragment>
+    </>
   );
 }

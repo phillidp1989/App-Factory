@@ -22,7 +22,7 @@ export default function Index() {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <>
       <Grid
         container
         justify="center"
@@ -43,6 +43,6 @@ export default function Index() {
           <AddIcon />
         </Fab>
       </Zoom>
-    </React.Fragment>
+    </>
   );
 }

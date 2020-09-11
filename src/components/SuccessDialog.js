@@ -14,7 +14,7 @@ export default function SuccessDialog({ dialogOpen, setDialogOpen, postId, retur
 
   const handleClose = () => {
     setDialogOpen(false);
-    window.location.href = `/posts/${postId}`
+    window.location.replace(`https://app-factory-djd.herokuapp.com/posts/${postId}`)
   };
 
 

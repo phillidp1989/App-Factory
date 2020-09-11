@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 import PostForm from './PostForm';
@@ -12,6 +12,9 @@ import {
   Grow
 } from '@material-ui/core';
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import API from '../../utils/API';
+import { UserContext } from '../../context/UserContext';
+import SuccessDialog from '../../components/SuccessDialog';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Index() {
   const classes = useStyles();
+  const { user } = useContext(UserContext);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const [postData, setPostData] = useState({
     title: '',
@@ -64,7 +69,8 @@ export default function Index() {
         checked: false
       }
     ],
-    technologies: []
+    technologies: [],
+    posterId: ""
   });
 
   const [err, setErr] = useState({
@@ -107,7 +113,7 @@ export default function Index() {
     }));
   };
 
-  const postForm = () => {
+  const postForm = async () => {
     // Checking if err state is true and returning key if so
     const errCheck = (err, { title, summary, description, categories }) => {
       // These checks need to be separate so the inputs don't flag errors on page load
@@ -142,8 +148,19 @@ export default function Index() {
       .filter(({ checked }) => checked)
       .map(({ name }) => name);
 
-    const newPost = { ...postData, categories };
-    console.log(newPost);
+    // Mapping technologies into an array of strings
+    const technologies = postData.technologies.map(
+      (technology) => technology.title
+    );
+
+    const newPost = { ...postData, categories, technologies, posterId: user._id };
+
+    try {
+      const result = await API.savePost(newPost);
+      setDialogOpen(true);
+    } catch (err) {
+      console.error('ERROR - index.js - postForm', err);
+    }
   };
 
   const inputErrCheck = (e) => {
@@ -151,6 +168,7 @@ export default function Index() {
     // Setting error state if required input changes to empty
     setErr({ ...err, [name]: value.length === 0 });
   };
+
 
   return (
     <React.Fragment>
@@ -184,6 +202,12 @@ export default function Index() {
           <PostAddIcon />
         </Fab>
       </Zoom>
+      <SuccessDialog
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        returnTo='Return to homepage'
+        successText='You have successfully added your idea to the App Factory'
+      />
     </React.Fragment>
   );
 }

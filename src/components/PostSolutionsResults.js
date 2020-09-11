@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import DevPost from './devPost';
+import PostSolution from './PostSolution';
 import { Grid } from '@material-ui/core';
 import API from '../utils/API';
 
-export default function DevPostResults() {
+export default function PostSolutionsResults() {
   const [solutions, setSolutions] = useState([]);
   // const [currentPage, setCurrentPage] = useState(1);
   // const [postsPerPage] = useState(5)
@@ -37,7 +37,7 @@ export default function DevPostResults() {
     <React.Fragment>
       {solutions.map((solution) => (
         <Grid key={solution.repoName} item xs={10}>
-          <DevPost
+          <PostSolution
             id={solution._id}
             title={solution.repoName}
             summary={solution.repoDescription}

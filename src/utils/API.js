@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
   currentUser: async () => {
     try {
-      return await axios.get('http://localhost:5000/api/user', {
+      return await axios.get('/api/user', {
         withCredentials: true
       });
     } catch (err) {
@@ -55,10 +55,10 @@ export default {
     }
   },
 
-  getPostSolutions: async () => {
+  getPostSolutions: async (id) => {
     try {
       return await axios.get(
-        '/solutions/post/:id'
+        `/solutions/post/${id}`
         // 'http://localhost:5000/api/solutions/post/5f4c1eebdc995345f4a59af2'
       );
     } catch (err) {
@@ -115,10 +115,10 @@ export default {
       console.error('ERROR - API.js - unlikeDevPost', err);
     }
   },
-  getUserSolutions: async () => {
+  getUserSolutions: async (id) => {
     try {
       return await axios.get(
-        '/solutions/developer/:id'
+        `/solutions/developer/${id}`
         // 'http://localhost:5000/api/solutions/developer/5f458293eb85b45f1875891d'
       );
     } catch (err) {

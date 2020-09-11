@@ -42,7 +42,9 @@ export default {
 
   getPostSolutions: async () => {
     try {
-      return await axios.get('http://localhost:5000/api/solutions/post/:id');
+      return await axios.get(
+        'http://localhost:5000/api/solutions/post/5f4c1eebdc995345f4a59af2'
+      );
     } catch (err) {
       console.error('ERROR - API.js - getPostSolutions', err);
     }

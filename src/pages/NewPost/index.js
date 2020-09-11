@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 import PostForm from './PostForm';
@@ -12,6 +12,7 @@ import {
   Grow
 } from '@material-ui/core';
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import { UserContext } from '../../context/UserContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,8 +36,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Index() {
+export default function Index(props) {
   const classes = useStyles();
+  const { user } = useContext(UserContext);
+  const { currentPost } = props.location;
 
   const [postData, setPostData] = useState({
     title: '',
@@ -66,6 +69,19 @@ export default function Index() {
     ],
     technologies: []
   });
+  useEffect(() => {
+    if (user && currentPost && user._id === currentPost.posterId) {
+      setPostData((postData) => {
+        const categories = currentPost.category;
+        currentPost.category = postData.category.map(({ name, checked }) => ({
+          name,
+          checked: categories.includes(name)
+        }));
+        console.log(currentPost);
+        return currentPost;
+      });
+    }
+  }, [currentPost, user]);
 
   const [err, setErr] = useState({
     title: false,

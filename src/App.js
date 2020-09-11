@@ -7,9 +7,11 @@ import NewPost from './pages/NewPost';
 import AppPost from './pages/AppPost';
 import Login from './pages/Login';
 import PrivateRoute from './hocs/PrivateRoute';
+import DeveloperRoute from './hocs/DeveloperRoute';
 import { CssBaseline } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import GuestRoute from './hocs/GuestRoute';
+import SolutionForm from './pages/Solution/SolutionForm';
 import { blue } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
@@ -34,6 +36,10 @@ export default function App() {
           <Switch>
             <PrivateRoute path="/posts/new" component={NewPost} />
             <PrivateRoute path="/posts/edit/:id" component={NewPost} />
+            <DeveloperRoute
+              path="/posts/solution/:id"
+              component={SolutionForm}
+            />
             <Route path="/posts/:id" component={AppPost} />
           </Switch>
         </Router>

@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
+import BrushIcon from '@material-ui/icons/Brush';
+import MicIcon from '@material-ui/icons/Mic';
+import { UserContext } from '../context/UserContext';
+import Toast from './Toast';
+import API from '../utils/API';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Collapse,
+  Avatar,
+  IconButton,
+  Typography
+} from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,17 +49,102 @@ const useStyles = makeStyles((theme) => ({
   },
   control: {
     padding: theme.spacing(2)
+  },
+  score: {
+    marginLeft: 5,
+    fontSize: 15
+  },
+  liked: {
+    fill: '#52b202'
   }
 }));
 
-export default function PostCard({ title, description, details }) {
+export default function PostCard({
+  id,
+  title,
+  category,
+  summary,
+  description,
+  score,
+  likedBy,
+  date
+}) {
   // Material UI card
   const classes = useStyles();
+  const { user, isLoaded } = useContext(UserContext);
   const [expanded, setExpanded] = React.useState(false);
+  const [likes, setLikes] = useState(score);
+  const [liked, setLiked] = useState(null);
+  const [open, setOpen] = React.useState(false);
+
+  // Date parsing
+  const postDate = new Date(date);
+  const createdAt = postDate.toLocaleString('en-GB', { timeZone: 'UTC' });
+
+  // Icon selection based on category
+  let categoryIcon;
+
+  switch (category[0]) {
+    case 'Business':
+      categoryIcon = <BusinessCenterIcon />;
+      break;
+    case 'Marketing':
+      categoryIcon = <MonetizationOnIcon />;
+      break;
+    case 'Design':
+      categoryIcon = <BrushIcon />;
+      break;
+    case 'Journalism':
+      categoryIcon = <MicIcon />;
+      break;
+    case 'Gaming':
+      categoryIcon = <SportsEsportsIcon />;
+      break;
+    default:
+      break;
+  }
+
+  const handleToast = () => {
+    setOpen(true);
+  };
+
+  useEffect(() => {
+    if (user) {
+      if (likedBy.includes(user._id) && isLoaded) {
+        setLiked(true);
+      } else {
+        setLiked(false);
+      }
+    }
+  }, [isLoaded]);
 
   const handleExpandClick = (event) => {
     event.stopPropagation();
     setExpanded(!expanded);
+  };
+
+  const likeHandler = async () => {
+    if (!user) {
+      handleToast();
+    } else {
+      try {
+        setLikes(likes + 1);
+        setLiked(true);
+        const result = await API.likePost(id, user._id);
+      } catch (err) {
+        console.error('ERROR - PostCard.js - likeHandler', err);
+      }
+    }
+  };
+
+  const unlikeHandler = async () => {
+    try {
+      setLikes(likes - 1);
+      setLiked(false);
+      const result = await API.unlikePost(id, user._id);
+    } catch (err) {
+      console.error('ERROR - PostCard.js - unlikeHandler', err);
+    }
   };
 
   return (
@@ -56,7 +152,7 @@ export default function PostCard({ title, description, details }) {
       <CardHeader
         avatar={
           <Avatar aria-label="post" className={classes.avatar}>
-            P
+            {categoryIcon}
           </Avatar>
         }
         action={
@@ -65,19 +161,35 @@ export default function PostCard({ title, description, details }) {
           </IconButton>
         }
         key={title}
-        title={title}
-        subheader="September 14, 2016"
+        title={<Link to={`/posts/${id}`}>{title}</Link>}
+        subheader={createdAt}
       />
 
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {description}
+          {summary}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="thumb up">
-          <ThumbUpAltIcon />
-        </IconButton>
+        {!isLoaded
+          ? null
+          : [
+            liked && isLoaded ? (
+              <IconButton aria-label="thumb down" onClick={unlikeHandler}>
+                <ThumbUpAltIcon className={classes.liked} />
+                <Typography variant="h6" className={classes.score}>
+                  {likes}
+                </Typography>
+              </IconButton>
+            ) : (
+                <IconButton aria-label="thumb up" onClick={likeHandler}>
+                  <ThumbUpAltIcon />
+                  <Typography variant="h6" className={classes.score}>
+                    {likes}
+                  </Typography>
+                </IconButton>
+              )
+          ]}
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -91,10 +203,11 @@ export default function PostCard({ title, description, details }) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>More About:</Typography>
-          <Typography paragraph>{details}</Typography>
+          <Typography paragraph>Summary:</Typography>
+          <Typography paragraph>{description}</Typography>
         </CardContent>
       </Collapse>
+      <Toast open={open} setOpen={setOpen} text={'Login to like a post!'} />
     </Card>
   );
 }

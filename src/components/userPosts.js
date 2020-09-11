@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PostCard from './PostCard';
-import { Grid } from '@material-ui/core';
 import AppFilterMenu from './AppFilterMenu';
 import BasicPagination from './Pagniation';
+import { Grid } from '@material-ui/core';
+import { UserContext } from '../context/UserContext';
 import API from '../utils/API';
 
-export default function PostResults() {
+export default function UserPosts() {
   const [posts, setPosts] = useState([]);
   const [activePosts, setActivePosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
+  const { user, isLoaded } = useContext(UserContext);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const getUserPosts = async () => {
+      console.log(user);
       try {
-        const { data } = await API.allPosts();
-        setPosts(data);
-        setActivePosts(data);
+        if (user) {
+          const { data } = await API.getUserPosts(user._id);
+          setPosts(data);
+          setActivePosts(data);
+        }
       } catch (err) {
-        console.error('ERROR - PostResults.js - fetchPosts', err);
+        console.error('ERROR - UserPosts() - getUserPosts', err);
       }
     };
-    fetchPosts();
+    getUserPosts();
   }, [currentPage]);
 
   // Pagination logic
@@ -35,14 +40,14 @@ export default function PostResults() {
   };
 
   return (
-    <>
+    <React.Fragment>
       <AppFilterMenu
         posts={posts}
         activePosts={activePosts}
         setActivePosts={setActivePosts}
       />
       {currentPosts.map((post) => (
-        <Grid key={post.title} item xs={10}>
+        <Grid item xs={10} key={post.title}>
           <PostCard
             id={post._id}
             title={post.title}
@@ -62,6 +67,6 @@ export default function PostResults() {
           handleChange={handleChange}
         />
       </Grid>
-    </>
+    </React.Fragment>
   );
 }

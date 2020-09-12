@@ -31,7 +31,7 @@ export default function PieChart({ data }) {
     <div>
       <Pie data={chartData} options={{
         responsive: true, legend: {
-          position: 'bottom'
+          position: 'bottom', labels: { fontColor: '#fff' }
         }
       }} />
     </div>

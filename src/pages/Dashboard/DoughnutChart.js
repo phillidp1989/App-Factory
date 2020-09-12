@@ -33,7 +33,7 @@ export default function DoughnutChart({ data }) {
     <div>
       <Doughnut data={chartData} options={{
         responsive: true, legend: {
-          position: 'bottom'
+          position: 'bottom', labels: { fontColor: '#fff' }
         }
       }} />
     </div>

@@ -33,7 +33,20 @@ export default function BarChart({ data, list }) {
   return (
     <div>
       <Bar data={chartData} options={{
-        responsive: true
+        responsive: true, legend: { labels: { fontColor: '#fff' } }, scales: {
+          yAxes: [{
+            ticks: {
+              fontColor: "fff",
+              stepSize: 1,
+              beginAtZero: true
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              fontColor: "fff",
+            }
+          }]
+        }
       }} />
     </div>
   )

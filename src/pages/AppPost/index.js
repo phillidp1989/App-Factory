@@ -66,7 +66,8 @@ export default function Index() {
     activeDevelopers: [],
     solutions: [],
     likedBy: [],
-    updatedAt: ''
+    updatedAt: '',
+    posterId: ""
   });
 
   useLayoutEffect(() => {
@@ -78,7 +79,7 @@ export default function Index() {
       setPostData({ ...data, _id });
     };
     getPost();
-    return () => {};
+    return () => { };
   }, [_id]);
 
   const { title, summary, description, category, technologies } = postData;
@@ -146,7 +147,7 @@ export default function Index() {
           </Grid>
         </Container>
       </Grow>
-      {user && user.id === _id && (
+      {user && user._id === postData.posterId && (
         <Zoom in={true}>
           <Fab
             component={Link}

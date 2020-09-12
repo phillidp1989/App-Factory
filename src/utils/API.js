@@ -12,7 +12,7 @@ export default {
   },
   allPosts: async () => {
     try {
-      return await axios.get('http://localhost:5000/api/posts');
+      return await axios.get('/api/posts');
     } catch (err) {
       console.error('ERROR - API.js - allPosts', err);
     }
@@ -47,9 +47,7 @@ export default {
   getUserPosts: async (id) => {
     try {
       return await axios.get(`/api/posts/user/${id}`);
-      // return await axios.get(
-      //   'http://localhost:5000/api/posts/user/5f458293eb85b45f1875891d'
-      // );
+
     } catch (err) {
       console.error('ERROR - API.js - getUserPosts', err);
     }
@@ -59,8 +57,8 @@ export default {
     try {
       console.log(postId);
       return await axios.get(
-        `http://localhost:5000/api/solutions/post/${postId}`
-        // 'http://localhost:5000/api/solutions/post/5f4c1eebdc995345f4a59af2'
+        `/api/solutions/post/${postId}`
+
       );
     } catch (err) {
       console.error('ERROR - API.js - getPostSolutions', err);
@@ -120,7 +118,7 @@ export default {
   },
   likeDevPost: async (solutionId, userId) => {
     try {
-      return await axios.put('/solutions/like', {
+      return await axios.put('/api/solutions/like', {
         solutionId,
         userId
       });
@@ -130,7 +128,7 @@ export default {
   },
   unlikeDevPost: async (solutionId, userId) => {
     try {
-      return await axios.put('/solutions/unlike', {
+      return await axios.put('/api/solutions/unlike', {
         solutionId,
         userId
       });
@@ -141,8 +139,7 @@ export default {
   getUserSolutions: async (id) => {
     try {
       return await axios.get(
-        `/solutions/developer/${id}`
-        // 'http://localhost:5000/api/solutions/developer/5f458293eb85b45f1875891d'
+        `/api/solutions/developer/${id}`
       );
     } catch (err) {
       console.error('ERROR - API.js - getUserSolutions', err);

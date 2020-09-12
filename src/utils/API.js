@@ -77,6 +77,28 @@ export default {
       console.error('ERROR - API.js - getPost', err);
     }
   },
+  getSolution: async (id) => {
+    try {
+      return await axios.get(`/api/solutions/${id}`);
+    } catch (err) {
+      console.error('ERROR - API.js - getSolution', err);
+    }
+  },
+  updateSolution: async (solutionData) => {
+    try {
+      console.log(solutionData);
+      return await axios.put(`/api/solutions`, solutionData);
+    } catch (err) {
+      console.error('ERROR - API.js - updateSolution', err);
+    }
+  },
+  deleteSolution: async (id) => {
+    try {
+      return await axios.delete(`/api/solutions/${id}`);
+    } catch (err) {
+      console.error('ERROR - API.js - deleteSolution', err);
+    }
+  }
 };
 
 

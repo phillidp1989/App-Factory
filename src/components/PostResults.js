@@ -37,7 +37,7 @@ export default function PostResults() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <AppFilterMenu
         posts={posts}
         activePosts={activePosts}
@@ -64,6 +64,6 @@ export default function PostResults() {
           handleChange={handleChange}
         />
       </Grid>
-    </React.Fragment>
+    </>
   );
 }

@@ -9,7 +9,8 @@ import {
   Fab,
   Grow,
   Grid,
-  Chip
+  Chip,
+  Button
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import axios from 'axios';
@@ -57,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
     // padding-right: 16px;
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  ctaLink: {
+    display: 'flex',
+    justifyContent: 'flex-end'
   }
 }));
 
@@ -153,6 +158,19 @@ export default function Index() {
               className={classes.description}
               dangerouslySetInnerHTML={createMarkup()} // Sanitised
             ></Grid>
+            <Grid item xs={12} className={classes.ctaLink}>
+              {/* {user && !user.isDeveloper && ( */}
+              <Button
+                component={Link}
+                color="secondary"
+                to={`/posts/solution/${postData._id}`}
+                variant="contained"
+                className={classes.ctaLink}
+              >
+                Build It!
+              </Button>
+              {/* )} */}
+            </Grid>
           </Grid>
         </Container>
       </Grow>

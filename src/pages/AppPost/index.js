@@ -9,12 +9,14 @@ import {
   Fab,
   Grow,
   Grid,
-  Chip
+  Chip,
+  Button
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
+import PostSolutionsResults from '../../components/PostSolutionsResults';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +49,19 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: green[600]
     }
+  },
+  postSolutions: {
+    width: '100%',
+    display: 'flex',
+    boxSizing: 'border-box',
+    // paddingLeft:
+    // padding-right: 16px;
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  ctaLink: {
+    display: 'flex',
+    justifyContent: 'flex-end'
   }
 }));
 
@@ -54,7 +69,6 @@ export default function Index() {
   const classes = useStyles();
   const { id: _id } = useParams();
   const { user } = useContext(UserContext);
-
   const [postData, setPostData] = useState({
     _id: '',
     title: 'Loading...',
@@ -67,7 +81,7 @@ export default function Index() {
     solutions: [],
     likedBy: [],
     updatedAt: '',
-    posterId: ""
+    posterId: ''
   });
 
   useLayoutEffect(() => {
@@ -144,9 +158,24 @@ export default function Index() {
               className={classes.description}
               dangerouslySetInnerHTML={createMarkup()} // Sanitised
             ></Grid>
+            <Grid item xs={12} className={classes.ctaLink}>
+              {/* {user && !user.isDeveloper && ( */}
+              <Button
+                component={Link}
+                color="secondary"
+                to={`/posts/solution/${postData._id}`}
+                variant="contained"
+                className={classes.ctaLink}
+              >
+                Build It!
+              </Button>
+              {/* )} */}
+            </Grid>
           </Grid>
         </Container>
       </Grow>
+      <PostSolutionsResults postId={_id} className={classes.postSolutions} />
+
       {user && user._id === postData.posterId && (
         <Zoom in={true}>
           <Fab

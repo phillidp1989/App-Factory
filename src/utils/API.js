@@ -12,7 +12,7 @@ export default {
   },
   allPosts: async () => {
     try {
-      return await axios.get('/api/posts');
+      return await axios.get('http://localhost:5000/api/posts');
     } catch (err) {
       console.error('ERROR - API.js - allPosts', err);
     }
@@ -55,10 +55,11 @@ export default {
     }
   },
 
-  getPostSolutions: async (id) => {
+  getPostSolutions: async (postId) => {
     try {
+      console.log(postId);
       return await axios.get(
-        `/solutions/post/${id}`
+        `http://localhost:5000/api/solutions/post/${postId}`
         // 'http://localhost:5000/api/solutions/post/5f4c1eebdc995345f4a59af2'
       );
     } catch (err) {

@@ -23,7 +23,6 @@ import {
   IconButton,
   Typography
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -216,7 +215,6 @@ export default function PostSolution({
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Resources:</Typography>
-          {/* <Typography paragraph>{solution.repoDescription}</Typography> */}
 
           <Typography paragraph>
             Deployed Link:

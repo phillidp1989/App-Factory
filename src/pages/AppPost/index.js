@@ -15,6 +15,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
+import PostSolutionsResults from '../../components/PostSolutionsResults';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +48,15 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: green[600]
     }
+  },
+  postSolutions: {
+    width: '100%',
+    display: 'flex',
+    boxSizing: 'border-box',
+    // paddingLeft:
+    // padding-right: 16px;
+    flexDirection: 'column',
+    alignItems: 'center'
   }
 }));
 
@@ -146,6 +156,8 @@ export default function Index() {
           </Grid>
         </Container>
       </Grow>
+      <PostSolutionsResults postId={_id} className={classes.postSolutions} />
+
       {user && user.id === _id && (
         <Zoom in={true}>
           <Fab

@@ -2,14 +2,24 @@ import React, { useState, useEffect } from 'react';
 import PostSolution from './PostSolution';
 import { Grid } from '@material-ui/core';
 import API from '../utils/API';
+import { makeStyles } from '@material-ui/core/styles';
 
-export default function PostSolutionsResults() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: theme.spacing(2)
+  }
+}));
+
+export default function PostSolutionsResults({ postId }) {
+  const classes = useStyles();
   const [solutions, setSolutions] = useState([]);
 
   useEffect(() => {
     const getPostSolutions = async () => {
       try {
-        const { data } = await API.getPostSolutions();
+        // const { data } = await API.getPostSolutions('5f4c1eebdc995345f4a59af2');
+        const { data } = await API.getPostSolutions(postId);
+
         setSolutions(data.solutions);
         console.log(data.solutions);
       } catch (err) {
@@ -20,7 +30,7 @@ export default function PostSolutionsResults() {
   }, []);
 
   return (
-    <React.Fragment>
+    <Grid container justify="center" className={classes.root}>
       {solutions.map((solution) => (
         <Grid key={solution.repoName} item xs={10}>
           <PostSolution
@@ -34,6 +44,6 @@ export default function PostSolutionsResults() {
           />
         </Grid>
       ))}
-    </React.Fragment>
+    </Grid>
   );
 }

@@ -17,3 +17,7 @@ code {
   min-height: 150px;
   max-height: 400px;
 }
+
+a {
+  color: #ffffff;
+}

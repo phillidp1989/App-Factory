@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
   },
   liked: {
     fill: '#52b202'
+  },
+  postsTitle: {
+    color: 'white'
   }
 }));
 
@@ -161,7 +164,15 @@ export default function PostCard({
           </IconButton>
         }
         key={title}
-        title={<Link to={`/posts/${id}`}>{title}</Link>}
+        title={
+          <Link
+            to={`/posts/${id}`}
+            className={classes.postsTitle}
+            color="primary"
+          >
+            {title}
+          </Link>
+        }
         subheader={createdAt}
       />
 

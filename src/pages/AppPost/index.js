@@ -69,7 +69,6 @@ export default function Index() {
   const classes = useStyles();
   const { id: _id } = useParams();
   const { user } = useContext(UserContext);
-
   const [postData, setPostData] = useState({
     _id: '',
     title: 'Loading...',
@@ -81,7 +80,8 @@ export default function Index() {
     activeDevelopers: [],
     solutions: [],
     likedBy: [],
-    updatedAt: ''
+    updatedAt: '',
+    posterId: ''
   });
 
   useLayoutEffect(() => {
@@ -176,7 +176,7 @@ export default function Index() {
       </Grow>
       <PostSolutionsResults postId={_id} className={classes.postSolutions} />
 
-      {user && user.id === _id && (
+      {user && user._id === postData.posterId && (
         <Zoom in={true}>
           <Fab
             component={Link}

@@ -11,8 +11,8 @@ import DeveloperRoute from './hocs/DeveloperRoute';
 import { CssBaseline } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import GuestRoute from './hocs/GuestRoute';
-import SolutionForm from './pages/Solution/SolutionForm';
-import SolutionEdit from './pages/Solution/SolutionEdit';
+import SolutionForm from './pages/SolutionForm';
+import SolutionEdit from './pages/SolutionEdit';
 import { blue } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({

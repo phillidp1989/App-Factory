@@ -2,13 +2,11 @@ import React, { useContext } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
-import SearchIcon from '@material-ui/icons/Search';
 import {
   AppBar,
   Toolbar,
   IconButton,
   Typography,
-  InputBase,
   Menu,
   MenuItem,
   Button
@@ -82,8 +80,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   link: {
-    textDecoration: 'none !important',
-    color: 'black'
+    textDecoration: 'none'
   },
   pointer: {
     cursor: 'pointer'
@@ -170,15 +167,15 @@ export default function SearchAppBar() {
               </Menu>
             </div>
           ) : (
-            <Button
-              component={Link}
-              to="/login"
-              aria-label="Login"
-              color="inherit"
-            >
-              Login
-            </Button>
-          )}
+              <Button
+                component={Link}
+                to="/login"
+                aria-label="Login"
+                color="inherit"
+              >
+                Login
+              </Button>
+            )}
         </Toolbar>
       </AppBar>
     </div>

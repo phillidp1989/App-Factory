@@ -10,6 +10,7 @@ import DeveloperRoute from './hocs/DeveloperRoute';
 import { CssBaseline } from '@material-ui/core';
 import GuestRoute from './hocs/GuestRoute';
 import SolutionForm from './pages/Solution/SolutionForm';
+import SolutionEdit from './pages/Solution/SolutionEdit';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/posts/new" component={NewPost} />
         <DeveloperRoute path="/posts/solution/:id" component={SolutionForm} />
+        <DeveloperRoute path="/solution/edit/:id" component={SolutionEdit} />
       </Router>
     </div>
   );

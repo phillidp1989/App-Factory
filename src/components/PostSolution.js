@@ -69,7 +69,8 @@ export default function PostSolution({
   repo_link,
   score,
   likedBy,
-  date
+  date,
+  comments
 }) {
   // Material UI card
   const classes = useStyles();
@@ -173,7 +174,7 @@ export default function PostSolution({
         key={title}
         // title={<Link to={`/posts/${id}`}>{solution.title}</Link>}
         title={title}
-        // subheader={createdAt}
+      // subheader={createdAt}
       />
 
       <CardContent>
@@ -185,14 +186,14 @@ export default function PostSolution({
         {!isLoaded
           ? null
           : [
-              liked && isLoaded ? (
-                <IconButton aria-label="thumb down" onClick={unlikeHandler}>
-                  <ThumbUpAltIcon className={classes.liked} />
-                  <Typography variant="h6" className={classes.score}>
-                    {likes}
-                  </Typography>
-                </IconButton>
-              ) : (
+            liked && isLoaded ? (
+              <IconButton aria-label="thumb down" onClick={unlikeHandler}>
+                <ThumbUpAltIcon className={classes.liked} />
+                <Typography variant="h6" className={classes.score}>
+                  {likes}
+                </Typography>
+              </IconButton>
+            ) : (
                 <IconButton aria-label="thumb up" onClick={likeHandler}>
                   <ThumbUpAltIcon />
                   <Typography variant="h6" className={classes.score}>
@@ -200,7 +201,7 @@ export default function PostSolution({
                   </Typography>
                 </IconButton>
               )
-            ]}
+          ]}
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -214,17 +215,19 @@ export default function PostSolution({
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Resources:</Typography>
+          <Typography paragraph>Comments:{' '}
+            <ul>{comments.map((comment) => (<li>{comment}</li>))}</ul>
+          </Typography>
 
           <Typography paragraph>
-            Deployed Link:
+            Deployed Link:{' '}
             {deployed_link ? (
               <a href={deployed_link} target="_blank" rel="noopener noreferrer">
                 {deployed_link}
               </a>
             ) : (
-              'There is no current Deployed App'
-            )}
+                'There is no current Deployed App'
+              )}
           </Typography>
 
           <Typography paragraph>

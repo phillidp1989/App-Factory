@@ -144,9 +144,6 @@ export default function PostSolution({
         setLikes(likes + 1);
         setLiked(true);
         const result = await API.likeDevPost(id, user._id);
-
-        console.log(user._id);
-        console.log(id);
       } catch (err) {
         console.error('ERROR - PostCard.js - likeHandler', err);
       }
@@ -158,7 +155,6 @@ export default function PostSolution({
       setLikes(likes - 1);
       setLiked(false);
       const result = await API.unlikeDevPost(id, user._id);
-      console.log(user._id);
     } catch (err) {
       console.error('ERROR - PostCard.js - unlikeHandler', err);
     }

@@ -45,7 +45,10 @@ export default function App() {
               path="/posts/solution/:id"
               component={SolutionForm}
             />
-            <DeveloperRoute path="/solution/edit/:id" component={SolutionEdit} />
+            <DeveloperRoute
+              path="/solution/edit/:id"
+              component={SolutionEdit}
+            />
             <Route path="/posts/:id" component={AppPost} />
           </Switch>
         </Router>

@@ -88,6 +88,7 @@ export default function Index() {
     posterId: ''
   });
 
+
   useLayoutEffect(() => {
     const { pathname } = window.location;
     const getPost = async () => {
@@ -169,7 +170,7 @@ export default function Index() {
                 dangerouslySetInnerHTML={createMarkup()} // Sanitised
               ></Grid>
               <Grid item xs={12} className={classes.ctaLink}>
-                {user && !user.isDeveloper && (
+                {user && user.isDeveloper && (
                   <Button
                     component={Link}
                     color="secondary"

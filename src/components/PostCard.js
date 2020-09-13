@@ -153,7 +153,7 @@ export default function PostCard({
       try {
         setLikes(likes + 1);
         setLiked(true);
-        const result = await API.likePost(id, user._id);
+        await API.likePost(id, user._id);
       } catch (err) {
         console.error('ERROR - PostCard.js - likeHandler', err);
       }
@@ -164,11 +164,15 @@ export default function PostCard({
     try {
       setLikes(likes - 1);
       setLiked(false);
-      const result = await API.unlikePost(id, user._id);
+      await API.unlikePost(id, user._id);
     } catch (err) {
       console.error('ERROR - PostCard.js - unlikeHandler', err);
     }
   };
+
+  function createMarkup() {
+    return { __html: description };
+  }
 
   return (
     <Card className={classes.root}>
@@ -235,9 +239,12 @@ export default function PostCard({
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Summary:</Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {description}
-          </Typography>
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            dangerouslySetInnerHTML={createMarkup()}
+          ></Typography>
           {avatars.length === 0 ? null : (
             <>
               <Typography className={classes.activeDevelopers}>

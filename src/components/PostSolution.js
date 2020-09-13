@@ -135,7 +135,7 @@ export default function PostSolution({
       try {
         setLikes(likes + 1);
         setLiked(true);
-        const result = await API.likeDevPost(id, user._id);
+        await API.likeDevPost(id, user._id);
 
         console.log(user._id);
         console.log(id);
@@ -149,7 +149,7 @@ export default function PostSolution({
     try {
       setLikes(likes - 1);
       setLiked(false);
-      const result = await API.unlikeDevPost(id, user._id);
+      await API.unlikeDevPost(id, user._id);
       console.log(user._id);
     } catch (err) {
       console.error('ERROR - PostCard.js - unlikeHandler', err);
@@ -172,9 +172,7 @@ export default function PostSolution({
           </IconButton>
         }
         key={title}
-        // title={<Link to={`/posts/${id}`}>{solution.title}</Link>}
         title={title}
-      // subheader={createdAt}
       />
 
       <CardContent>
@@ -240,7 +238,5 @@ export default function PostSolution({
       </Collapse>
       <Toast open={open} setOpen={setOpen} text={'Login to like a post!'} />
     </Card>
-    // ))}
-    // </React.Fragment>
   );
 }

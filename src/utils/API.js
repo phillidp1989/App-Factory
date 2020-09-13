@@ -144,5 +144,12 @@ export default {
     } catch (err) {
       console.error('ERROR - API.js - getUserSolutions', err);
     }
+  },
+  getDeveloperAvatars: async (id) => {
+    try {
+      return await axios.get(`/api/posts/activedeveloperavatars/${id}`)
+    } catch (err) {
+      console.error('ERROR - API.js - getDeveloperAvatars', err);
+    }
   }
 };

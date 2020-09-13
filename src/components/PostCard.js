@@ -24,6 +24,7 @@ import {
   Typography
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,6 +60,12 @@ const useStyles = makeStyles((theme) => ({
   },
   postsTitle: {
     color: 'white'
+  },
+  activeDevelopers: {
+    marginTop: 20
+  },
+  avatarGroup: {
+    marginTop: 20
   }
 }));
 
@@ -75,10 +82,11 @@ export default function PostCard({
   // Material UI card
   const classes = useStyles();
   const { user, isLoaded } = useContext(UserContext);
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
   const [likes, setLikes] = useState(score);
   const [liked, setLiked] = useState(null);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [avatars, setAvatars] = useState([]);
 
   // Date parsing
   const postDate = new Date(date);
@@ -120,6 +128,18 @@ export default function PostCard({
       }
     }
   }, [isLoaded]);
+
+  useEffect(() => {
+    const getAvatars = async () => {
+      try {
+        const { data } = await API.getDeveloperAvatars(id);
+        setAvatars(data.activeDevelopers);
+      } catch (err) {
+        console.error('ERROR - PostCard.js - getAvatars', err);
+      }
+    };
+    getAvatars();
+  }, []);
 
   const handleExpandClick = (event) => {
     event.stopPropagation();
@@ -185,14 +205,14 @@ export default function PostCard({
         {!isLoaded
           ? null
           : [
-              liked && isLoaded ? (
-                <IconButton aria-label="thumb down" onClick={unlikeHandler}>
-                  <ThumbUpAltIcon className={classes.liked} />
-                  <Typography variant="h6" className={classes.score}>
-                    {likes}
-                  </Typography>
-                </IconButton>
-              ) : (
+            liked && isLoaded ? (
+              <IconButton aria-label="thumb down" onClick={unlikeHandler}>
+                <ThumbUpAltIcon className={classes.liked} />
+                <Typography variant="h6" className={classes.score}>
+                  {likes}
+                </Typography>
+              </IconButton>
+            ) : (
                 <IconButton aria-label="thumb up" onClick={likeHandler}>
                   <ThumbUpAltIcon />
                   <Typography variant="h6" className={classes.score}>
@@ -200,7 +220,7 @@ export default function PostCard({
                   </Typography>
                 </IconButton>
               )
-            ]}
+          ]}
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -215,7 +235,21 @@ export default function PostCard({
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Summary:</Typography>
-          <Typography paragraph>{description}</Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {description}
+          </Typography>
+          {avatars.length === 0 ? null : (
+            <>
+              <Typography className={classes.activeDevelopers}>
+                Active developers:{' '}
+              </Typography>
+              <AvatarGroup className={classes.avatarGroup} max={4}>
+                {avatars.map((avatar) => (
+                  <Avatar alt="avatar" src={avatar} />
+                ))}
+              </AvatarGroup>
+            </>
+          )}
         </CardContent>
       </Collapse>
       <Toast open={open} setOpen={setOpen} text={'Login to like a post!'} />

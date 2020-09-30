@@ -61,7 +61,7 @@ export default function PostResults() {
       <Grid item xs={10}>
         <BasicPagination
           postsPerPage={postsPerPage}
-          totalPosts={posts.length}
+          totalPosts={activePosts.length}
           handleChange={handleChange}
         />
       </Grid>

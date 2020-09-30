@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { Grid } from '@material-ui/core';
+import SearchBar from './SearchBar';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -13,14 +14,15 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: '50%',
+    minWidth: '70%',
     [theme.breakpoints.up(780)]: {
       minWidth: '30%'
     }
   },
   root: {
     textAlign: 'center',
-    marginBottom: 30
+    marginBottom: 30,
+    justifyContent: 'space-evenly'
   }
 }));
 
@@ -35,7 +37,7 @@ export default function SimpleMenu({ posts, activePosts, setActivePosts }) {
     if (event.target.value === 'No. of likes') {
       const likedPosts = [...posts].sort((a, b) => b.score - a.score);
       setActivePosts(likedPosts);
-    } else {
+    } else if (event.target.value === 'Newest to oldest') {
       const datePosts = [...posts].sort((a, b) => {
         return a.createdAt < b.createdAt
           ? 1
@@ -44,6 +46,8 @@ export default function SimpleMenu({ posts, activePosts, setActivePosts }) {
             : 0;
       });
       setActivePosts(datePosts);
+    } else {
+      setActivePosts(posts);
     }
   };
 
@@ -55,11 +59,23 @@ export default function SimpleMenu({ posts, activePosts, setActivePosts }) {
     setOpen(true);
   };
 
+  const onTagsChange = (e, value) => {
+    if (value === "") {
+      setActivePosts(posts);
+    } else {
+      const filteredPosts = posts.filter((post) => {
+        return post.title.toLowerCase().includes(value.toLowerCase());
+      });
+      setActivePosts(filteredPosts);
+    }
+  };
+
   return (
-    <Grid item xs={12} className={classes.root}>
+    <Grid container xs={12} className={classes.root}>
+      <SearchBar posts={posts} onTagsChange={onTagsChange} />
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-controlled-open-select-label">
-          Sort app ideas
+          Sort posts
         </InputLabel>
         <Select
           labelId="demo-controlled-open-select-label"
@@ -73,7 +89,7 @@ export default function SimpleMenu({ posts, activePosts, setActivePosts }) {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={'Date posted'}>Date posted</MenuItem>
+          <MenuItem value={'Newest to oldest'}>Newest to oldest</MenuItem>
           <MenuItem value={'No. of likes'}>No. of likes</MenuItem>
         </Select>
       </FormControl>

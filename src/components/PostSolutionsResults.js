@@ -17,7 +17,6 @@ export default function PostSolutionsResults({ postId }) {
   useEffect(() => {
     const getPostSolutions = async () => {
       try {
-        // const { data } = await API.getPostSolutions('5f4c1eebdc995345f4a59af2');
         const { data } = await API.getPostSolutions(postId);
 
         setSolutions(data.solutions);
@@ -42,6 +41,8 @@ export default function PostSolutionsResults({ postId }) {
             repo_link={solution.repoLink}
             likedBy={solution.likedBy}
             comments={solution.comments}
+            developerId={solution.developerId}
+            date={solution.createdAt}
           />
         </Grid>
       ))}

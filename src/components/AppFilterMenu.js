@@ -1,10 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { Grid } from '@material-ui/core';
+import { Grid, NativeSelect } from '@material-ui/core';
 import SearchBar from './SearchBar';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,13 +24,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SimpleMenu({ posts, activePosts, setActivePosts }) {
+export default function SimpleMenu({ posts, setActivePosts }) {
   const classes = useStyles();
-  const [activeSort, setActiveSort] = React.useState('');
-  const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
-    setActiveSort(event.target.value);
 
     if (event.target.value === 'No. of likes') {
       const likedPosts = [...posts].sort((a, b) => b.score - a.score);
@@ -46,18 +41,12 @@ export default function SimpleMenu({ posts, activePosts, setActivePosts }) {
             : 0;
       });
       setActivePosts(datePosts);
-    } else {
-      setActivePosts(posts);
+    } else if (event.target.value === 'Most active developers') {
+      const mostActiveDevelopers = [...posts].sort((a, b) => b.activeDevelopers.length - a.activeDevelopers.length);
+      setActivePosts(mostActiveDevelopers);
     }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const onTagsChange = (e, value) => {
     if (value === "") {
@@ -71,27 +60,24 @@ export default function SimpleMenu({ posts, activePosts, setActivePosts }) {
   };
 
   return (
-    <Grid container xs={12} className={classes.root}>
+    <Grid container className={classes.root}>
       <SearchBar posts={posts} onTagsChange={onTagsChange} />
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-controlled-open-select-label">
           Sort posts
         </InputLabel>
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          value={activeSort}
+        <NativeSelect
+          defaultValue={'Newest to oldest'}
+          inputProps={{
+            name: 'sort',
+            id: 'uncontrolled-native',
+          }}
           onChange={handleChange}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={'Newest to oldest'}>Newest to oldest</MenuItem>
-          <MenuItem value={'No. of likes'}>No. of likes</MenuItem>
-        </Select>
+          <option value={'Newest to oldest'}>Newest to oldest</option>
+          <option value={'No. of likes'}>No. of likes</option>
+          <option value={'Most active developers'}>Most active developers</option>
+        </NativeSelect>
       </FormControl>
     </Grid>
   );

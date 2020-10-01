@@ -165,7 +165,7 @@ export default {
     try {
       return await axios.get(`${url}/api/user/${posterId}`)
     } catch (err) {
-      console.error('ERROR - API.js - getDeveloperAvatars', err);
+      console.error('ERROR - API.js - getUser', err);
     }
   }
 };

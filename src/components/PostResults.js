@@ -15,9 +15,16 @@ export default function PostResults() {
     const fetchPosts = async () => {
       try {
         const { data } = await API.allPosts();
-        setPosts(data);
+        const datePosts = [...data].sort((a, b) => {
+          return a.createdAt < b.createdAt
+            ? 1
+            : a.createdAt > b.createdAt
+              ? -1
+              : 0;
+        })
+        setPosts(datePosts);
         if (activePosts.length === 0) {
-          setActivePosts(data);
+          setActivePosts(datePosts);
         }
       } catch (err) {
         console.error('ERROR - PostResults.js - fetchPosts', err);
